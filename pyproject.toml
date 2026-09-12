@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-agent-research-lab"
+version = "0.1.0"
+description = "A Gemini-powered multi-agent research and architecture review system."
+requires-python = ">=3.11"
+
+dependencies = [
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.6.0",
+]
+
+[project.scripts]
+research-agent = "research_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
