@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Android public behavior evidence candidate",
+  "type": "object",
+  "required": [
+    "record_id",
+    "schema_version",
+    "behavior",
+    "sample",
+    "manifest_evidence",
+    "code_evidence",
+    "behavior_relationships",
+    "sources",
+    "claims",
+    "validation",
+    "analysis_sources",
+    "sample_sources"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample": {
+      "type": "object",
+      "required": [
+        "sha256",
+        "package_name",
+        "app_name",
+        "malware_family",
+        "campaign_or_variant"
+      ],
+      "properties": {
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Optional public SHA256; null is valid and is not grounds for rejection."
+        },
+        "package_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "app_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "malware_family": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "campaign_or_variant": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "manifest_evidence": {
+      "type": "object",
+      "required": [
+        "permissions",
+        "components"
+      ],
+      "properties": {
+        "permissions": {
+          "type": "array"
+        },
+        "components": {
+          "type": "array"
+        }
+      }
+    },
+    "code_evidence": {
+      "type": "array"
+    },
+    "behavior_relationships": {
+      "type": "array"
+    },
+    "claims": {
+      "type": "array"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "supports"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https?://"
+          },
+          "supports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "dataset_decision",
+        "evidence_strength",
+        "analyst_verified"
+      ],
+      "properties": {
+        "dataset_decision": {
+          "enum": [
+            "ACCEPT",
+            "REJECT"
+          ]
+        },
+        "evidence_strength": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "analyst_verified": {
+          "type": "boolean",
+          "description": "Only an explicit manual analyst review may set true."
+        }
+      }
+    },
+    "analysis_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "supports"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https?://"
+          },
+          "supports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "sample_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sample_page_url",
+          "repository_page_url",
+          "download_page_url",
+          "repository_name",
+          "sample_availability",
+          "evidence_status",
+          "supports"
+        ],
+        "properties": {
+          "sample_page_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^https?://"
+          },
+          "repository_page_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^https?://"
+          },
+          "download_page_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^https?://"
+          },
+          "repository_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sample_availability": {
+            "enum": [
+              "AVAILABLE",
+              "REQUIRES_ACCESS",
+              "UNAVAILABLE",
+              "UNKNOWN"
+            ]
+          },
+          "evidence_status": {
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED"
+            ]
+          },
+          "supports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

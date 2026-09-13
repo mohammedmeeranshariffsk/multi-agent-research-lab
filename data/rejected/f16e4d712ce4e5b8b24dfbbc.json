@@ -1,0 +1,713 @@
+{
+  "record_id": "f16e4d712ce4e5b8b24dfbbc",
+  "schema_version": "1.0",
+  "behavior": "SMS / OTP / Notification Interception",
+  "sample": {
+    "sha256": null,
+    "package_name": "ir.devixor.app",
+    "app_name": "deVixor",
+    "malware_family": "deVixor",
+    "campaign_or_variant": "v2.3.0"
+  },
+  "discovered_candidate": {
+    "sha256": null,
+    "package_name": "ir.devixor.app",
+    "app_name": "deVixor",
+    "malware_family": "deVixor",
+    "campaign_or_variant": "v2.3.0",
+    "behavior_claim": "SMS Interception for OTP capture and banking message parsing; Keylogger via Accessibility Service abuse; Overlay attacks; Ransomware functionality.",
+    "evidence_scope": "SAMPLE_LEVEL",
+    "publication_date": "2026-02-25",
+    "sample_reference": null,
+    "sources": [],
+    "analysis_sources": [
+      {
+        "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis",
+        "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+        "source_type": "vendor",
+        "publication_date": "2026-02-25"
+      }
+    ],
+    "sample_sources": [
+      {
+        "sample_page_url": null,
+        "repository_page_url": null,
+        "download_page_url": null,
+        "repository_name": null,
+        "sample_availability": "UNKNOWN"
+      }
+    ]
+  },
+  "manifest_evidence": {
+    "permissions": [],
+    "components": []
+  },
+  "code_evidence": [
+    {
+      "claim_id": "claim_str_bot_id",
+      "kind": "string",
+      "value": "deVixor_Qq1tjN49",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Bot ID, deVixor_Qq1tjN49, assets/port.json.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_trx_wallet",
+      "kind": "string",
+      "value": "TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "TRX Wallet, TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6, o/CM.java.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_wakelock_tag",
+      "kind": "string",
+      "value": "deVixor::Wake",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Wake Lock Tag, deVixor::Wake, ForegroundService.java",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_offline_phone",
+      "kind": "string",
+      "value": "09014019397",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Offline Phone, 09014019397, assets/off_mod.json.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    }
+  ],
+  "behavior_relationships": [
+    {
+      "claim_id": "claim_rel_main_logic",
+      "kind": "relationship",
+      "value": "ir/devixor/app/ package contains the main application logic",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "The ir/devixor/app/ package contains the main application logic with clean, readable class names",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_rel_obfuscated_package",
+      "kind": "relationship",
+      "value": "o/ package contains 4,824 obfuscated classes",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "the o/ package contains 4,824 files with heavily obfuscated single-letter and short alphanumeric class names",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim_pkg_name",
+      "kind": "package_name",
+      "value": "ir.devixor.app",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Package Name, ir.devixor.app, AndroidManifest.xml.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_app_name",
+      "kind": "app_name",
+      "value": "deVixor",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_malware_family",
+      "kind": "malware_family",
+      "value": "deVixor",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "deVixor v2.3.0, a sophisticated Android banking trojan",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_variant",
+      "kind": "campaign_or_variant",
+      "value": "v2.3.0",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "analysis of deVixor v2.3.0",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_sms",
+      "kind": "behavior",
+      "value": "SMS Interception for OTP capture and banking message parsing",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "SMS Interception for OTP capture and banking message parsing;",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_keylogger",
+      "kind": "behavior",
+      "value": "Keylogger via Accessibility Service abuse with 1.2s debounce mechanism",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Keylogger via Accessibility Service abuse with 1.2s debounce mechanism;",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_overlay",
+      "kind": "behavior",
+      "value": "Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks;",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_ransomware",
+      "kind": "behavior",
+      "value": "Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD)",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD);",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_power_block",
+      "kind": "behavior",
+      "value": "Power Button Blocking preventing device shutdown",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Power Button Blocking preventing device shutdown;",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_beh_anti_uninstall",
+      "kind": "behavior",
+      "value": "Anti-Uninstall Protection with bilingual keyword detection (Persian/English)",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Anti-Uninstall Protection with bilingual keyword detection (Persian/English);",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_bot_id",
+      "kind": "string",
+      "value": "deVixor_Qq1tjN49",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Bot ID, deVixor_Qq1tjN49, assets/port.json.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_trx_wallet",
+      "kind": "string",
+      "value": "TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "TRX Wallet, TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6, o/CM.java.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_wakelock_tag",
+      "kind": "string",
+      "value": "deVixor::Wake",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Wake Lock Tag, deVixor::Wake, ForegroundService.java",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_str_offline_phone",
+      "kind": "string",
+      "value": "09014019397",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "Offline Phone, 09014019397, assets/off_mod.json.",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_rel_main_logic",
+      "kind": "relationship",
+      "value": "ir/devixor/app/ package contains the main application logic",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "The ir/devixor/app/ package contains the main application logic with clean, readable class names",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "claim_id": "claim_rel_obfuscated_package",
+      "kind": "relationship",
+      "value": "o/ package contains 4,824 obfuscated classes",
+      "evidence_scope": "SAMPLE_LEVEL",
+      "sources": [
+        {
+          "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+          "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+          "source_type": "vendor",
+          "publication_date": "2026-02-25"
+        }
+      ],
+      "excerpt": "the o/ package contains 4,824 files with heavily obfuscated single-letter and short alphanumeric class names",
+      "class_name": null,
+      "method_name": null,
+      "evidence_status": "VERIFIED"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+      "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+      "source_type": "vendor",
+      "publication_date": "2026-02-25",
+      "supports": [
+        "claim_pkg_name",
+        "claim_app_name",
+        "claim_malware_family",
+        "claim_variant",
+        "claim_beh_sms",
+        "claim_beh_keylogger",
+        "claim_beh_overlay",
+        "claim_beh_ransomware",
+        "claim_beh_power_block",
+        "claim_beh_anti_uninstall",
+        "claim_str_bot_id",
+        "claim_str_trx_wallet",
+        "claim_str_wakelock_tag",
+        "claim_str_offline_phone",
+        "claim_rel_main_logic",
+        "claim_rel_obfuscated_package"
+      ]
+    }
+  ],
+  "analysis_sources": [
+    {
+      "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+      "url": "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+      "source_type": "vendor",
+      "publication_date": "2026-02-25",
+      "supports": [
+        "claim_pkg_name",
+        "claim_app_name",
+        "claim_malware_family",
+        "claim_variant",
+        "claim_beh_sms",
+        "claim_beh_keylogger",
+        "claim_beh_overlay",
+        "claim_beh_ransomware",
+        "claim_beh_power_block",
+        "claim_beh_anti_uninstall",
+        "claim_str_bot_id",
+        "claim_str_trx_wallet",
+        "claim_str_wakelock_tag",
+        "claim_str_offline_phone",
+        "claim_rel_main_logic",
+        "claim_rel_obfuscated_package"
+      ]
+    }
+  ],
+  "sample_sources": [
+    {
+      "sample_page_url": null,
+      "repository_page_url": null,
+      "download_page_url": null,
+      "repository_name": null,
+      "sample_availability": "UNKNOWN",
+      "evidence_status": "UNVERIFIED",
+      "supports": []
+    }
+  ],
+  "validation": {
+    "dataset_decision": "REJECT",
+    "evidence_strength": "LOW",
+    "analyst_verified": false,
+    "assessments": [
+      {
+        "claim_id": "claim_pkg_name",
+        "status": "VERIFIED",
+        "reason": "The report explicitly identifies the package name as ir.devixor.app based on the AndroidManifest.xml.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Package Name, ir.devixor.app, AndroidManifest.xml."
+      },
+      {
+        "claim_id": "claim_app_name",
+        "status": "VERIFIED",
+        "reason": "The analysis title and content identify the malware as deVixor.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis"
+      },
+      {
+        "claim_id": "claim_malware_family",
+        "status": "VERIFIED",
+        "reason": "The report identifies deVixor as a sophisticated Android banking trojan.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "deVixor v2.3.0, a sophisticated Android banking trojan"
+      },
+      {
+        "claim_id": "claim_variant",
+        "status": "VERIFIED",
+        "reason": "The report specifically analyzes version 2.3.0 of the deVixor malware.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "analysis of deVixor v2.3.0"
+      },
+      {
+        "claim_id": "claim_beh_sms",
+        "status": "VERIFIED",
+        "reason": "The report confirms the malware performs SMS interception for OTP capture and parsing bank messages.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "SMS Interception for OTP capture and banking message parsing;"
+      },
+      {
+        "claim_id": "claim_beh_keylogger",
+        "status": "VERIFIED",
+        "reason": "The report identifies a keylogger implemented via Accessibility Service abuse with a 1.2s debounce mechanism.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Keylogger via Accessibility Service abuse with 1.2s debounce mechanism;"
+      },
+      {
+        "claim_id": "claim_beh_overlay",
+        "status": "VERIFIED",
+        "reason": "The report describes credential theft via JavaScript injection overlays targeting 9 Iranian banks.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks;"
+      },
+      {
+        "claim_id": "claim_beh_ransomware",
+        "status": "VERIFIED",
+        "reason": "The report details ransomware functionality demanding a TRON (TRX) payment of 50 TRX.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD);"
+      },
+      {
+        "claim_id": "claim_beh_power_block",
+        "status": "VERIFIED",
+        "reason": "The report lists Power Button Blocking as a capability to prevent device shutdown.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Power Button Blocking preventing device shutdown;"
+      },
+      {
+        "claim_id": "claim_beh_anti_uninstall",
+        "status": "VERIFIED",
+        "reason": "The report describes anti-uninstall protection using bilingual (Persian/English) keyword detection.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Anti-Uninstall Protection with bilingual keyword detection (Persian/English);"
+      },
+      {
+        "claim_id": "claim_str_bot_id",
+        "status": "VERIFIED",
+        "reason": "The report identifies the Bot ID 'deVixor_Qq1tjN49' within the assets/port.json file.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Bot ID, deVixor_Qq1tjN49, assets/port.json."
+      },
+      {
+        "claim_id": "claim_str_trx_wallet",
+        "status": "VERIFIED",
+        "reason": "The report identifies the TRX wallet address 'TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6' in o/CM.java.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "TRX Wallet, TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6, o/CM.java."
+      },
+      {
+        "claim_id": "claim_str_wakelock_tag",
+        "status": "VERIFIED",
+        "reason": "The report identifies the Wake Lock Tag 'deVixor::Wake' in ForegroundService.java.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Wake Lock Tag, deVixor::Wake, ForegroundService.java"
+      },
+      {
+        "claim_id": "claim_str_offline_phone",
+        "status": "VERIFIED",
+        "reason": "The report identifies the offline phone number '09014019397' in assets/off_mod.json.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "Offline Phone, 09014019397, assets/off_mod.json."
+      },
+      {
+        "claim_id": "claim_rel_main_logic",
+        "status": "VERIFIED",
+        "reason": "The report states the ir/devixor/app/ package contains the primary application logic with clean class names.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "The ir/devixor/app/ package contains the main application logic with clean, readable class names"
+      },
+      {
+        "claim_id": "claim_rel_obfuscated_package",
+        "status": "VERIFIED",
+        "reason": "The report identifies that the o/ package contains 4,824 obfuscated files.",
+        "supporting_urls": [
+          "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/"
+        ],
+        "source_excerpt": "the o/ package contains 4,824 files with heavily obfuscated single-letter and short alphanumeric class names"
+      }
+    ],
+    "model_decision": "REJECT"
+  },
+  "audit": {
+    "investigation": {
+      "text": "```json\n{\n  \"sample_sources\": [\n    {\n      \"sample_page_url\": null,\n      \"repository_page_url\": null,\n      \"download_page_url\": null,\n      \"repository_name\": null,\n      \"sample_availability\": \"UNKNOWN\"\n    }\n  ],\n  \"claims\": [\n    {\n      \"claim_id\": \"claim_pkg_name\",\n      \"kind\": \"package_name\",\n      \"value\": \"ir.devixor.app\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Package Name, ir.devixor.app, AndroidManifest.xml.\"\n    },\n    {\n      \"claim_id\": \"claim_app_name\",\n      \"kind\": \"app_name\",\n      \"value\": \"deVixor\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis\"\n    },\n    {\n      \"claim_id\": \"claim_malware_family\",\n      \"kind\": \"malware_family\",\n      \"value\": \"deVixor\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"deVixor v2.3.0, a sophisticated Android banking trojan\"\n    },\n    {\n      \"claim_id\": \"claim_variant\",\n      \"kind\": \"campaign_or_variant\",\n      \"value\": \"v2.3.0\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"analysis of deVixor v2.3.0\"\n    },\n    {\n      \"claim_id\": \"claim_beh_sms\",\n      \"kind\": \"behavior\",\n      \"value\": \"SMS Interception for OTP capture and banking message parsing\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"SMS Interception for OTP capture and banking message parsing;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_keylogger\",\n      \"kind\": \"behavior\",\n      \"value\": \"Keylogger via Accessibility Service abuse with 1.2s debounce mechanism\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Keylogger via Accessibility Service abuse with 1.2s debounce mechanism;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_overlay\",\n      \"kind\": \"behavior\",\n      \"value\": \"Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_ransomware\",\n      \"kind\": \"behavior\",\n      \"value\": \"Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD)\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD);\"\n    },\n    {\n      \"claim_id\": \"claim_beh_power_block\",\n      \"kind\": \"behavior\",\n      \"value\": \"Power Button Blocking preventing device shutdown\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Power Button Blocking preventing device shutdown;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_anti_uninstall\",\n      \"kind\": \"behavior\",\n      \"value\": \"Anti-Uninstall Protection with bilingual keyword detection (Persian/English)\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Anti-Uninstall Protection with bilingual keyword detection (Persian/English);\"\n    },\n    {\n      \"claim_id\": \"claim_str_bot_id\",\n      \"kind\": \"string\",\n      \"value\": \"deVixor_Qq1tjN49\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Bot ID, deVixor_Qq1tjN49, assets/port.json.\"\n    },\n    {\n      \"claim_id\": \"claim_str_trx_wallet\",\n      \"kind\": \"string\",\n      \"value\": \"TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"TRX Wallet, TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6, o/CM.java.\"\n    },\n    {\n      \"claim_id\": \"claim_str_wakelock_tag\",\n      \"kind\": \"string\",\n      \"value\": \"deVixor::Wake\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Wake Lock Tag, deVixor::Wake, ForegroundService.java\"\n    },\n    {\n      \"claim_id\": \"claim_str_offline_phone\",\n      \"kind\": \"string\",\n      \"value\": \"09014019397\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"Offline Phone, 09014019397, assets/off_mod.json.\"\n    },\n    {\n      \"claim_id\": \"claim_rel_main_logic\",\n      \"kind\": \"relationship\",\n      \"value\": \"ir/devixor/app/ package contains the main application logic\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"The ir/devixor/app/ package contains the main application logic with clean, readable class names\"\n    },\n    {\n      \"claim_id\": \"claim_rel_obfuscated_package\",\n      \"kind\": \"relationship\",\n      \"value\": \"o/ package contains 4,824 obfuscated classes\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"excerpt\": \"the o/ package contains 4,824 files with heavily obfuscated single-letter and short alphanumeric class names\"\n    }\n  ]\n}\n```",
+      "sources": [
+        {
+          "title": "8ksec.io",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQERPCt3d254QC_4ttpFxZcbZuxsJqCpizMqPpE25GBawB-MI447PNgsrVkUCe6EC3SQSyYvQeHvz3QdRh3rjv5yQJ7xal2Vjy33RrdHzOlrBhY87DVI18DoVPLG_UWAoCabCCjBz8s_BNp5sFLQDnrwGSg="
+        },
+        {
+          "title": "8ksec.io",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvHnvo0goy5HeJpN7bQHj-9SBES5naOSuPgxlCFzIgrKNHeSiJgcKBmY7jppPTaGhd2iknj4BtPvIMo4MvoQkZ0OAa0pk1dij24msuZpulUqLMOOXLqw3kvGSMemtsNbx7jFCTNHGtn8cX"
+        },
+        {
+          "title": "noticiasmobile.com.br",
+          "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGSzdm55H6CaIqHfdn5_4HQMQYn11X9_i6O0mHQkMOJveCSLnlCnU4GGZZDTFspURDiy9ypdslS43YHF-vMRn07bUsicyWuQiMqsDM9SHixHSprKN_f_NQ3L1kvV5v68PQiaOCVdDr2essa4ofZOQ=="
+        }
+      ],
+      "search_queries": [
+        "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+        "\"ir.devixor.app\" deVixor malware analysis",
+        "\"ir.devixor.app\" SMS OTP interception accessibility service overlay"
+      ]
+    },
+    "sample_locator": {
+      "text": "```json\n{\n  \"sample_sources\": []\n}\n```",
+      "sources": [],
+      "search_queries": [
+        "\"ir.devixor.app\" malware sample",
+        "\"ir.devixor.app\" APK",
+        "\"deVixor\" malware sample",
+        "\"deVixor\" APK",
+        "\"deVixor\" MalwareBazaar",
+        "\"deVixor\" ANY.RUN",
+        "\"deVixor\" Joe Sandbox",
+        "\"deVixor\" Hybrid Analysis",
+        "\"deVixor_Qq1tjN49\" malware",
+        "\"TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6\" malware"
+      ]
+    },
+    "validator": {
+      "text": "```json\n{\n  \"assessments\": [\n    {\n      \"claim_id\": \"claim_pkg_name\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report explicitly identifies the package name as ir.devixor.app based on the AndroidManifest.xml.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Package Name, ir.devixor.app, AndroidManifest.xml.\"\n    },\n    {\n      \"claim_id\": \"claim_app_name\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The analysis title and content identify the malware as deVixor.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis\"\n    },\n    {\n      \"claim_id\": \"claim_malware_family\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies deVixor as a sophisticated Android banking trojan.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"deVixor v2.3.0, a sophisticated Android banking trojan\"\n    },\n    {\n      \"claim_id\": \"claim_variant\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report specifically analyzes version 2.3.0 of the deVixor malware.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"analysis of deVixor v2.3.0\"\n    },\n    {\n      \"claim_id\": \"claim_beh_sms\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report confirms the malware performs SMS interception for OTP capture and parsing bank messages.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"SMS Interception for OTP capture and banking message parsing;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_keylogger\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies a keylogger implemented via Accessibility Service abuse with a 1.2s debounce mechanism.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Keylogger via Accessibility Service abuse with 1.2s debounce mechanism;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_overlay\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report describes credential theft via JavaScript injection overlays targeting 9 Iranian banks.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Banking Credential Theft via JavaScript injection overlay attacks against 9 Iranian banks;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_ransomware\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report details ransomware functionality demanding a TRON (TRX) payment of 50 TRX.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Ransomware with TRON (TRX) cryptocurrency payment demanding 50 TRX (~$6 USD);\"\n    },\n    {\n      \"claim_id\": \"claim_beh_power_block\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report lists Power Button Blocking as a capability to prevent device shutdown.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Power Button Blocking preventing device shutdown;\"\n    },\n    {\n      \"claim_id\": \"claim_beh_anti_uninstall\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report describes anti-uninstall protection using bilingual (Persian/English) keyword detection.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Anti-Uninstall Protection with bilingual keyword detection (Persian/English);\"\n    },\n    {\n      \"claim_id\": \"claim_str_bot_id\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies the Bot ID 'deVixor_Qq1tjN49' within the assets/port.json file.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Bot ID, deVixor_Qq1tjN49, assets/port.json.\"\n    },\n    {\n      \"claim_id\": \"claim_str_trx_wallet\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies the TRX wallet address 'TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6' in o/CM.java.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"TRX Wallet, TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6, o/CM.java.\"\n    },\n    {\n      \"claim_id\": \"claim_str_wakelock_tag\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies the Wake Lock Tag 'deVixor::Wake' in ForegroundService.java.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Wake Lock Tag, deVixor::Wake, ForegroundService.java\"\n    },\n    {\n      \"claim_id\": \"claim_str_offline_phone\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies the offline phone number '09014019397' in assets/off_mod.json.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"Offline Phone, 09014019397, assets/off_mod.json.\"\n    },\n    {\n      \"claim_id\": \"claim_rel_main_logic\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report states the ir/devixor/app/ package contains the primary application logic with clean class names.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"The ir/devixor/app/ package contains the main application logic with clean, readable class names\"\n    },\n    {\n      \"claim_id\": \"claim_rel_obfuscated_package\",\n      \"status\": \"VERIFIED\",\n      \"reason\": \"The report identifies that the o/ package contains 4,824 obfuscated files.\",\n      \"supporting_urls\": [\n        \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\"\n      ],\n      \"source_excerpt\": \"the o/ package contains 4,824 files with heavily obfuscated single-letter and short alphanumeric class names\"\n    }\n  ],\n  \"dataset_decision\": \"REJECT\"\n}\n```\n\nDATASET_DECISION: REJECT",
+      "sources": [],
+      "search_queries": [
+        "https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/",
+        "\"deVixor\" Iranian Banking Trojan analysis 8ksec",
+        "\"ir.devixor.app\" deVixor malware",
+        "\"deVixor_Qq1tjN49\"",
+        "\"TYDzsYUEpvnYmQk9sWMcTEd2MiAtW6\""
+      ]
+    }
+  }
+}

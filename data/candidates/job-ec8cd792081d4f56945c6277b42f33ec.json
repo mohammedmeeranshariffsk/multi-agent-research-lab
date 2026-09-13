@@ -1,0 +1,12 @@
+{
+  "behavior": "SMS / OTP / Notification Interception",
+  "records": [],
+  "errors": [
+    {
+      "type": "ServerError",
+      "message": "500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}"
+    }
+  ],
+  "requests_used": 2,
+  "requests_maximum": 12
+}

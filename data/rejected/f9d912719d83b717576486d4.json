@@ -1,0 +1,52 @@
+{
+  "record_id": "f9d912719d83b717576486d4",
+  "schema_version": "1.0",
+  "behavior": "SMS / OTP / Notification Interception",
+  "sample": {
+    "sha256": null,
+    "package_name": null,
+    "app_name": null,
+    "malware_family": null,
+    "campaign_or_variant": null
+  },
+  "discovered_candidate": {
+    "sha256": null,
+    "package_name": "ir.devixor.app",
+    "app_name": null,
+    "malware_family": "deVixor",
+    "campaign_or_variant": null,
+    "behavior_claim": "SMS Interception for OTP capture and banking message parsing",
+    "evidence_scope": "SAMPLE_LEVEL",
+    "publication_date": "2026-02-25",
+    "sample_reference": "ir.devixor.app",
+    "sources": [
+      {
+        "title": "Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFCGAlzJj5k1Suf1JcRR1-kPAenRO8fmiwoDwm9OpRzvrG2EQRWqVwJ38b-ZBxbzkYCXF6JOdLkfFEyBCNw2WIP4y-KZBWWG4hHDwJCTFdqNs9NX1Q7Bwfwb-44520ISHCUKWYmfuOFlCy9Smsnb9uHPw==",
+        "source_type": "vendor",
+        "publication_date": "2026-02-25"
+      }
+    ]
+  },
+  "manifest_evidence": {
+    "permissions": [],
+    "components": []
+  },
+  "code_evidence": [],
+  "behavior_relationships": [],
+  "claims": [],
+  "sources": [],
+  "validation": {
+    "dataset_decision": "REJECT",
+    "evidence_strength": "LOW",
+    "analyst_verified": false,
+    "assessments": [],
+    "model_decision": "REJECT"
+  },
+  "audit": {
+    "error": {
+      "type": "ServerError",
+      "message": "500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}"
+    }
+  }
+}

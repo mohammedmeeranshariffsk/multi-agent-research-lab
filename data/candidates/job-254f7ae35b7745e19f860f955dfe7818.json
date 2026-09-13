@@ -1,0 +1,12 @@
+{
+  "behavior": "SMS / OTP / Notification Interception",
+  "records": [],
+  "errors": [
+    {
+      "type": "ConnectError",
+      "message": "[WinError 10051] A socket operation was attempted to an unreachable network"
+    }
+  ],
+  "requests_used": 1,
+  "requests_maximum": 12
+}

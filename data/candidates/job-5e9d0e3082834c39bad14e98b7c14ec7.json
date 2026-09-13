@@ -1,0 +1,67 @@
+{
+  "behavior": "SMS / OTP / Notification Interception",
+  "records": [
+    "data\\rejected\\f16e4d712ce4e5b8b24dfbbc.json"
+  ],
+  "errors": [],
+  "requests_used": 4,
+  "requests_maximum": 12,
+  "discovery": {
+    "text": "```json\n{\n  \"candidates\": [\n    {\n      \"sha256\": null,\n      \"package_name\": \"ir.devixor.app\",\n      \"app_name\": \"deVixor\",\n      \"malware_family\": \"deVixor\",\n      \"campaign_or_variant\": \"v2.3.0\",\n      \"behavior_claim\": \"SMS Interception for OTP capture and banking message parsing; Keylogger via Accessibility Service abuse; Overlay attacks; Ransomware functionality.\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"publication_date\": \"2026-02-25\",\n      \"sample_reference\": null,\n      \"analysis_sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis\",\n          \"url\": \"https://8ksec.com/mobile-malware-part-8-devixor-iranian-banking-trojan-analysis/\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ],\n      \"sample_sources\": [\n        {\n          \"sample_page_url\": null,\n          \"repository_page_url\": null,\n          \"download_page_url\": null,\n          \"repository_name\": null,\n          \"sample_availability\": \"UNKNOWN\"\n        }\n      ]\n    }\n  ]\n}\n```",
+    "sources": [
+      {
+        "title": "medium.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGOUs0HP6ts5U2HcHwoDFZj_V7vXuxlYrpXN1q_PoBn4WDAjF_631IBm-Bu8y60MaNj1LzNfl30EIIzh8rNJuIhkDt4jXLMCgPAq6Vrm8oXtsyb8JVPDVqJIFpdWip7JXqqEdgEIC-U_PgM8XBTgbKnQajhBLcz1fLgpdRb040DQ9ejtHQEwRoIiM47vbCH2sIKNgwVLNR2fpXDUfWv7zkVlFtPF5iRrW45-ZACHF7nYDY="
+      },
+      {
+        "title": "fyno.io",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEBnas7Hu_R2lbPmQsCDFmho0vdyCGoAmYEEU1gSK3R2lHlC8pI9JEQuHs9gG7y7KftoyAkA-YGt2lbOYgU2LUOawBVuQAJDXVgI-yT3X4VKTxs2VFTI8D4I4oIkrL6C1ps3bWTE01IbbTLmLd1C6JHbctbasoId0WWrGwRg5Om_paaFJw_ZSRsMDilQTIsbemx2M2PMEo="
+      },
+      {
+        "title": "hacktricks.wiki",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH44SpLTA5_ZscLwTRCQJf8XP6Wyh96Zj_ZaS7olMKAfP_WXZTdL_ywpczibkq0N4g4XVpLl5wFoG6oyxAf9ZSuJ4cl7zfkirZCRMXypPCMqTH1c3ehPmXEkMW75KKeZqPoBsg_6kSg5Ums9jCS4w2fDmDrsC-TvhKIf_gZJaeB56SE03MBuAQEYwHJGP645OlfgadeDzG1SB2gwHafBk5yAa0rDIHbFfDgOmpakvkpiTKeQnkoqcY="
+      },
+      {
+        "title": "8ksec.io",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuB_en6wIXxkrWa-pIYAOS175i-w8lxYkE4z2XLSchpxKbosAea-Ea8TDUJUOYkvasV_tv39vHqXo57o1kmeHxIitBXeN0yMJmAh_Gn1Lh_Kajn6kc5KnGSriYU0J5yXmV_0Z7pjUOoQYkIgzbEs8eELQ="
+      },
+      {
+        "title": "eset.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHVKQdhI61ClY3IB4mHte3NU9hv1hZBnbxV981SJG-m8JSLgTCMSR6vvycTZ87eUjoMdshZt3akLnKp8y6Gp2afaOrMiP6xbgolEwbTauRSgCzPBXjMgfUeGjAm4oVhm4N2Z6xtB9dUsZCHpgz1d6_MzO_isi1cnBG8p_DA6bKqLEwkj7X5IJaTtE6SF0tYN9RVKA5apDGGqnAClzIzrlYDvEXv0I_p56QH53sPjPwo3D4="
+      },
+      {
+        "title": "cyfirma.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQERaTDRFcPBGdh23Bsyd3VI7moO55UR82T0-V0F8YPHoJPjDnsXFo_Di1j2OfbWt9muQENzpecvkIO3k6fTJjy8pSSHrf_Pt-Nf22122Cwj1xWI9snEjvdengJy8rqxTbUP4uWA5i4qohuKcjetO1L3xsnylQDDI4xea8ZUxPRWof7ae_PM_oms8pPIezas7Tm3guQv3dXFHDeDK1UohczADy3xGiENVv_S45DXDli4nDraftrgGm4rdzUSI0w="
+      },
+      {
+        "title": "arxiv.org",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpIdPK-mkGKu7h4pne05xfsI5h0Rmg69o16G6T3fbhGiSx5Tv_xyg-bLVDOyxgjgen4_6MRoqu3JfxU-LYKuQCXT4VYNMXAnLjgdjr7t7x-nmANZ_AG6aW5w=="
+      },
+      {
+        "title": "securityarsenal.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGyn1i-_qvQXN2KwZcGwLfBgcxMGGxwE-ZEmfnfX0Gan88W3Cs7m3_CJ0mRm7jc7-KUFYOkSLnR1YpIqdZC3rgnl3XmJDR2bjYwJbh-KKJ2TEtGf_PDZvTe62w9bSjeB929GwSu85M4KGCNjAQrKsaoyKlnQiHlmUlBLVb5Su2G44b-ziRBjYcKtOUti3ypp7iJhlAY_IYZb55fC1ga6bHKk8XJAusnD-PT9PqkK8ax1Y8oKFGKHnG67w=="
+      },
+      {
+        "title": "threat-modeling.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGsgo6uGJrv4mfzFAcLDde7Vds2kKsQTY0PnbyPx8345nRJuASyMNMSPvKAbj0DIFphUB7aHNwJ37UWyCKh7oEhRLlNojnCjEoI0I06M5rEF_t4A-sPG1_K-LZ8RkNm_z-EiU86vjOt5_Ozn0crtyKCYEWY9DR3QJ1j_JBv8ASDk9JVZ9eD4Ate"
+      },
+      {
+        "title": "researchgate.net",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnBkvmL6XN-XDFUW4I0h_okdluQkEOvNgyHUtanZ56NWWRkrcXNF044v3ziclFkromH5AfJQ5p6uvgkl2As4PqcHZPoin9AquKvoxx6WEfgQhv8XBFkmu4aMKD3G63z7ZFYpEUE6bnx6LsavKjbzJUowMfUzvWo-DhieGlI7johRhpJYek65vUe4g2C2sfqQr7pMjxxKr5x3h_RiDzN53rp5nIunluUyPJvki-yBVKeGa3F9KeR2wEgi4AQtib8UXviYubIqS4y0dNcPor5jfC1eMBd8vz7S4hdworpoDPsCtk4QY="
+      },
+      {
+        "title": "gridinsoft.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQuo6OqcilhswznLNcWFWerkJsPdyEir55QAjFmelpoPMvn4KeWBQ4zskrLT4scb5xWYHCunm49bB6LNjYeAzkS1IX2651zC7kqYJ4SX96OEC8kXgOD4RHVPQBfO7-IZm46821HjIEezE8TahzSIdx7VtI5w=="
+      },
+      {
+        "title": "cyble.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEoSVv0HWL9unss7vv7dRaaDOWeqBgJbcyvBw0C2CCYeEl31b35b3_dW-vDAlBn9tqbrvp7SXraQ3EfqMU6acYaEeAAJfC7GEfmDRer0nxK4iiyZDkOil5dgDoqVR_XpMjFfZq_6C_PX-eNM-c0L3HAt_dG-HQraSMViXgR5E5L-gys"
+      }
+    ],
+    "search_queries": [
+      "Android malware \"SMS\" \"OTP\" \"Notification Interception\" report",
+      "\"SMS\" \"OTP\" interception Android malware family analysis",
+      "malware family intercepting SMS OTP notifications Android"
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "behavior": "SMS / OTP / Notification Interception",
+  "records": [
+    "data\\rejected\\f9d912719d83b717576486d4.json"
+  ],
+  "errors": [
+    {
+      "type": "ServerError",
+      "message": "500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}"
+    }
+  ],
+  "requests_used": 3,
+  "requests_maximum": 12,
+  "discovery": {
+    "text": "```json\n{\n  \"candidates\": [\n    {\n      \"sha256\": null,\n      \"package_name\": \"ir.devixor.app\",\n      \"app_name\": null,\n      \"malware_family\": \"deVixor\",\n      \"campaign_or_variant\": null,\n      \"behavior_claim\": \"SMS Interception for OTP capture and banking message parsing\",\n      \"evidence_scope\": \"SAMPLE_LEVEL\",\n      \"publication_date\": \"2026-02-25\",\n      \"sample_reference\": \"ir.devixor.app\",\n      \"sources\": [\n        {\n          \"title\": \"Mobile Malware Part 8: deVixor Iranian Banking Trojan Analysis | 8kSec\",\n          \"url\": \"https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFCGAlzJj5k1Suf1JcRR1-kPAenRO8fmiwoDwm9OpRzvrG2EQRWqVwJ38b-ZBxbzkYCXF6JOdLkfFEyBCNw2WIP4y-KZBWWG4hHDwJCTFdqNs9NX1Q7Bwfwb-44520ISHCUKWYmfuOFlCy9Smsnb9uHPw==\",\n          \"source_type\": \"vendor\",\n          \"publication_date\": \"2026-02-25\"\n        }\n      ]\n    }\n  ]\n}\n```",
+    "sources": [
+      {
+        "title": "checkpoint.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQCyiEPmrUeLjUU1wTKUidu0y_9pWsufP4LmZDk2jPKmVB3sag7HH3C_1nFl4OZIyB6Fy4LMtC5hA2P8V1PoOmSM2aizFPA_1-NKn1XmbnEdk9ih4T1Pyi00BtcirPW0jH18tPe8xPRvVLrwd3Jru_OYu8JSAX31LQiCuMq97hMFY1fksn"
+      },
+      {
+        "title": "joesecurity.org",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGfChp98SLPcqSpENjN3qAETjhcOpLHEy2_UW2SgxAL-cXjWgtvyfGdkrMlxNozNU-rZXyY3aZGkZnwY6D6-HgvVcGQJ0nxpspVrcoQUnOq56_k6gLEfqxcMRQcJY0BW9JCi9ZBIi69_TU="
+      },
+      {
+        "title": "8ksec.io",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFCGAlzJj5k1Suf1JcRR1-kPAenRO8fmiwoDwm9OpRzvrG2EQRWqVwJ38b-ZBxbzkYCXF6JOdLkfFEyBCNw2WIP4y-KZBWWG4hHDwJCTFdqNs9NX1Q7Bwfwb-44520ISHCUKWYmfuOFlCy9Smsnb9uHPw=="
+      },
+      {
+        "title": "any.run",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7iV8aoILfR9Re7eVp15g3GOgF5YyfT2RTdOtyBolkhQJo_0-fnhBQJcJwrZRtr7xFdvt7REYWPjKVfy_QIDOMS23WblzEm3885JkkV8WOLmIhPoZTTvp1QHcyRaML0jRAXC458uCMeWoNhBv-qlrz7TW80JiPs7zulA=="
+      },
+      {
+        "title": "deysec.in",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLEwsWR8Z0vmsEBbpDbqSXKkjveV-8CTynS6ydaB-O31m65u9xMDSr5paLe42Q3LL62OFbEdiTsFNajMk8Ifqv_mh91DzkVgkfPcQ5u8YGIwWbM9hdQ3Wk6vmN6_7OlXVlqNBCZ8e3b6U9bA=="
+      },
+      {
+        "title": "izoologic.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHHMD1L6QBQbGNxDWWNnPCzA_b81eYd8JoVBPS3DS-y_NLmZjGOmKKd8zjBZw6Xb7jasBaDsHZZpPC7fBymQOylyOaYkwjMngWUIa_FB94OWaUwUU9IylImFU6pm-tf-wOd2O-a1BsGaEiQgqEVGV2Qp57MGM1S8UNa_0HNWSSEi8fYRRAwhnyjZ9OgIqwgRPxSXxir_QZUm6sMUCWaqZrsoreONu_TkqbDIBGg6a6qMy1w8iUoz16bklySuarN76dgTn4QKvUjcS1bGw=="
+      },
+      {
+        "title": "researchgate.net",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFd_2ux5C_-TZQFbjgf9UlPHVWwxXP_K4jtktdijtQXZUIUumcnLGR6vpZ7NaWYaGUl9mK1znH5iX8kUxXzR99G7hpEDDby37lUaEc4Q1facFUV5gsjOkIwRbLOktq4aNAjqNWY0NljwKPLXhVHY6DR4tCjQ7hqXh4qXAsex99nEgpChlX59Cslnx5HjLA_EtSrawHicjL9R1N8dhjlVXKWF2jSlvQuDHqzHinvqKG4nRiIUTNWUXcPNt8h8E9TgyGJxBee2seQ79_EQnj0Xa31BK-t7jdW27AzL4fldA=="
+      },
+      {
+        "title": "cyfirma.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGLMQrjnF96PiptIWBjkRfr8Np3utJDpCr2sX3iSao73PzyF7zLGHt41T7oJ9zk8kyP-su8vXARSlN9v4u0isAYtKYyvhklo8Hrq-7YTLXQGJzR8RbEIvbxY8mT4lHLTqu0vr1i8Oq06olicSUqbfKO9Odeie4zH9fteIBdzNMHECRfHS5aiaq3CcYzeW2oYRfoaJ1v8iLb2c2nXAwbcmsebNe5p7z_dd4O2ey8KMn8fycDmOJVVYs="
+      },
+      {
+        "title": "gurucul.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPoeED0kb4dDM90IU0ik2aFKTwqUKWxg4nM_anP-vj7z709eviApURf9VllWIoLyHBEiY0HL3CzUk_Yy_ZS1qjD_EnRFQuLkSsl3mP5t1OegtiREtmMGz2j9KXHtpwILPdkyAhF8ZakK1kwY0pmQY6j6w3qvVx4Rz6yfH2NoJ2KFaGeRqYiW2sKxXNmIX4bNOA0cZZXPtl_a6OKAGmTQffHVShzzETLZ9bqzU19w=="
+      },
+      {
+        "title": "threatfabric.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE3o8EFL1fFenjOS8-RnqpgRXqBqtinjxycgnVizcVkgHzwU-x5sBXWLZ4Yv-gZu3x7Vl4xm1XIK_AAbBP2t5tk3kYWYND-dL9SWzFzB-JtGoDsdizXIp7T6olZs1vqoisGemWMJWXnKOe8VG6GI6kW6xLs"
+      },
+      {
+        "title": "cloudsek.com",
+        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFONbqRYKMVpFj-dVGyCDbYKC1CAC7jbSUwovYU5_JEW5VfLhfVWQKjZVCm5m1ZmgdevfRIc-Zd3s0wFAwTLWVK3Rnx6kHIb3ayjJUwNdd5oJWWhNSH0imn-U_A11VKXAS5qQ3WwKu-TWiI9ZWzdu5MFllLqpRVrp8tuQqEnLBr2Edtt2t49Y2L9WuuJeyhwFoaW7Ps9TWoMh_6iygc8JhYhrOGZCMAOVjv6JvYUhXhi4e0fxmykTlhx0RcufM="
+      }
+    ],
+    "search_queries": [
+      "Android malware \"SMS interception\" \"OTP\" \"Notification\" sha256 report",
+      "\"SMS / OTP / Notification Interception\" Android malware vendor report",
+      "Android banking trojan SMS interception sample sha256"
+    ]
+  }
+}
