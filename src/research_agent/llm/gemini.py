@@ -35,6 +35,7 @@ class GeminiClient:
     ) -> None:
         self.client = genai.Client(
             api_key=settings.gemini_api_key,
+            http_options=types.HttpOptions(timeout=60000, retry_options=types.HttpRetryOptions(attempts=1)),
         )
 
         self.budget = budget or RequestBudget(
@@ -89,6 +90,7 @@ class GeminiClient:
             contents=prompt,
             config=types.GenerateContentConfig(
                 tools=[types.Tool(google_search=types.GoogleSearch())],
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
             ),
         )
 

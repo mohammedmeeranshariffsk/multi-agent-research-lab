@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "multi-agent-research-lab"
 version = "0.1.0"
-description = "A Gemini-powered multi-agent research and architecture review system."
+description = "Public Android sample references and matching documented behavior evidence."
 requires-python = ">=3.11"
 
 dependencies = [
@@ -18,10 +18,11 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.6.0",
+    "jsonschema>=4.0.0",
 ]
 
 [project.scripts]
-research-agent = "research_agent.cli:main"
+research-agent = "research_agent.collection_orchestrator:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

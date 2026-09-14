@@ -16,4 +16,8 @@ def parse_validation(text):
 
 def validate_evidence(candidate, behavior, investigation, client):
     result = client.generate_grounded(prompt("evidence_validator", {"behavior": behavior, "candidate": candidate.model_dump(), "investigation": investigation.model_dump(), "output_schema": Validation.model_json_schema()}))
-    return parse_validation(result.text), result
+    try:
+        return parse_validation(result.text), result
+    except ValueError as exc:
+        exc.grounded_result = result
+        raise
