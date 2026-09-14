@@ -35,8 +35,14 @@ class GeminiClient:
     ) -> None:
         self.client = genai.Client(
             api_key=settings.gemini_api_key,
-            http_options=types.HttpOptions(timeout=60000, retry_options=types.HttpRetryOptions(attempts=1)),
+            http_options=types.HttpOptions(
+                retry_options=types.HttpRetryOptions(attempts=1),
+            ),
         )
+
+        # SDK 2.22's Interactions adapter translates attempts=1 into one
+        # additional retry. Disable it before any request is issued.
+        self.client.interactions.sdk_configuration.retry_config.strategy = "none"
 
         self.budget = budget or RequestBudget(
             maximum=settings.max_llm_requests
@@ -85,103 +91,14 @@ class GeminiClient:
         research_model = settings.gemini_research_model.removeprefix("models/")
         logger.info("[grounded] model=%s", research_model)
         logger.info("[grounded] google_search=true")
-        response = self.client.models.generate_content(
+        response = self.client.interactions.create(
             model=research_model,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())],
-                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
-            ),
+            input=prompt,
+            tools=[{"type": "google_search"}],
         )
-
-        sources: list[dict[str, str]] = []
-        search_queries: list[str] = []
-
-        seen_urls: set[str] = set()
-
-        candidates = getattr(
-            response,
-            "candidates",
-            None,
-        )
-
-        if candidates:
-            candidate = candidates[0]
-
-            metadata = getattr(
-                candidate,
-                "grounding_metadata",
-                None,
-            )
-
-            if metadata:
-                queries = getattr(
-                    metadata,
-                    "web_search_queries",
-                    None,
-                )
-
-                if queries:
-                    for query in queries:
-                        if query not in search_queries:
-                            search_queries.append(query)
-
-                chunks = getattr(
-                    metadata,
-                    "grounding_chunks",
-                    None,
-                )
-
-                if chunks:
-                    for chunk in chunks:
-                        web = getattr(
-                            chunk,
-                            "web",
-                            None,
-                        )
-
-                        if not web:
-                            continue
-
-                        title = (
-                            getattr(
-                                web,
-                                "title",
-                                "",
-                            )
-                            or ""
-                        )
-
-                        url = (
-                            getattr(
-                                web,
-                                "uri",
-                                "",
-                            )
-                            or ""
-                        )
-
-                        if not url:
-                            continue
-
-                        if url in seen_urls:
-                            continue
-
-                        seen_urls.add(url)
-
-                        sources.append(
-                            {
-                                "title": title,
-                                "url": url,
-                            }
-                        )
-
-        logger.info("[grounded] sources=%d", len(sources))
-        return GroundedResult(
-            text=response.text or "",
-            sources=sources,
-            search_queries=search_queries,
-        )
+        result = _parse_interaction(response)
+        logger.info("[grounded] sources=%d", len(result.sources))
+        return result
 
     def analyze_evidence(
         self,
@@ -240,3 +157,52 @@ Do not invent:
         )
 
         return response.text or ""
+
+
+def _field(value, name, default=None):
+    """Support SDK objects as well as model_dump dictionaries."""
+    return value.get(name, default) if isinstance(value, dict) else getattr(value, name, default)
+
+
+def _items(value):
+    return value if isinstance(value, (list, tuple)) else []
+
+
+def _parse_interaction(response) -> GroundedResult:
+    # google-genai 2.22: Interaction.steps -> ModelOutputStep.content ->
+    # TextContent.annotations -> URLCitation; search queries live in call steps.
+    sources: dict[str, dict[str, str]] = {}
+    queries: list[str] = []
+    text_parts: list[str] = []
+    for step in _items(_field(response, "steps")):
+        if _field(step, "type") == "google_search_call":
+            for query in _items(_field(_field(step, "arguments"), "queries")):
+                if isinstance(query, str) and query and query not in queries:
+                    queries.append(query)
+        if _field(step, "type") != "model_output":
+            continue
+        for content in _items(_field(step, "content")):
+            if _field(content, "type") != "text":
+                continue
+            text = _field(content, "text")
+            if isinstance(text, str) and text:
+                text_parts.append(text)
+            for annotation in _items(_field(content, "annotations")):
+                if _field(annotation, "type") != "url_citation":
+                    continue
+                url = _field(annotation, "url")
+                title = _field(annotation, "title")
+                if not isinstance(url, str) or not url.strip():
+                    continue
+                url = url.strip()
+                title = title if isinstance(title, str) else ""
+                if url not in sources:
+                    sources[url] = {"title": title, "url": url}
+                elif not sources[url]["title"] and title:
+                    sources[url]["title"] = title
+    answer = _field(response, "output_text")
+    return GroundedResult(
+        text=answer if isinstance(answer, str) and answer else "\n".join(text_parts),
+        sources=list(sources.values()),
+        search_queries=queries,
+    )

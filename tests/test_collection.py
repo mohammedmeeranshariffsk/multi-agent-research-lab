@@ -14,23 +14,24 @@ from research_agent.collection_orchestrator import run_collection
 def make_client(response=None, maximum=12):
     client = GeminiClient.__new__(GeminiClient)
     client.budget = RequestBudget(maximum)
-    client.client = NS(models=NS(generate_content=Mock(return_value=response)))
+    client.client = NS(interactions=NS(create=Mock(return_value=response)))
     return client
 
 def test_grounding_metadata_and_model(monkeypatch):
-    monkeypatch.setattr(settings, "gemini_research_model", "research-test")
-    web = NS(web=NS(uri="https://example.org/report", title=None))
-    response = NS(text="ok", candidates=[NS(grounding_metadata=NS(web_search_queries=["sms", "sms"], grounding_chunks=[web, web, NS(web=None)]))])
+    monkeypatch.setattr(settings, "gemini_research_model", "models/gemma-4-31b-it")
+    citation = NS(type="url_citation", url="https://example.org/report", title=None)
+    response = NS(output_text="ok", steps=[
+        NS(type="google_search_call", arguments=NS(queries=["sms", "sms"])),
+        NS(type="model_output", content=[NS(type="text", text="ok", annotations=[citation, citation, None])])])
     client = make_client(response)
     result = client.generate_grounded("test")
     assert result.sources == [{"title": "", "url": "https://example.org/report"}]
     assert result.search_queries == ["sms"]
-    kwargs = client.client.models.generate_content.call_args.kwargs
-    assert kwargs["model"] == "research-test"
-    assert kwargs["config"].tools[0].google_search is not None
-    assert kwargs["config"].tools[0].url_context is None
+    kwargs = client.client.interactions.create.call_args.kwargs
+    assert kwargs == {"model": "gemma-4-31b-it", "input": "test", "tools": [{"type": "google_search"}]}
+    assert result.text == "ok" and client.budget.used == 1
 
-@pytest.mark.parametrize("response", [NS(text=None), NS(text="", candidates=None), NS(text="", candidates=[NS(grounding_metadata=None)])])
+@pytest.mark.parametrize("response", [NS(output_text=None), NS(output_text="", steps=None), NS(steps=[NS(type="model_output", content=None)])])
 def test_missing_metadata(response):
     result = make_client(response).generate_grounded("test")
     assert result.sources == [] and result.search_queries == [] and result.text == ""
@@ -40,20 +41,20 @@ def test_retry_bounded_and_budgeted(code, attempts):
     error = RuntimeError("external failure")
     error.code = code
     client = make_client()
-    client.client.models.generate_content.side_effect = error
+    client.client.interactions.create.side_effect = error
     with pytest.raises(RuntimeError, match="external failure"):
         client.generate_grounded("test")
     assert client.budget.used == attempts
-    assert client.client.models.generate_content.call_count == attempts
+    assert client.client.interactions.create.call_count == attempts
 
 def test_budget_blocks_retry():
     error = RuntimeError("external failure")
     error.code = 503
     client = make_client(maximum=1)
-    client.client.models.generate_content.side_effect = error
+    client.client.interactions.create.side_effect = error
     with pytest.raises(RuntimeError, match="external failure"):
         client.generate_grounded("test")
-    assert client.client.models.generate_content.call_count == 1
+    assert client.client.interactions.create.call_count == 1
 
 def test_candidate_limit_and_null():
     result = GroundedResult(json.dumps({"candidates": [{"malware_family": str(i), "sha256": "UNKNOWN"} for i in range(9)]}), [], [])

@@ -288,8 +288,9 @@ def test_sdk_has_one_attempt_and_search_has_no_function_loop(monkeypatch):
     monkeypatch.setattr("research_agent.llm.gemini.genai.Client", constructor)
     client = GeminiClient()
     assert constructor.call_args.kwargs["http_options"].retry_options.attempts == 1
-    constructor.return_value.models.generate_content.return_value = SimpleNamespace(text="", candidates=[])
+    constructor.return_value.interactions.create.return_value = SimpleNamespace(output_text="", steps=[])
     client.generate_grounded("SYNTHETIC prompt")
-    config = constructor.return_value.models.generate_content.call_args.kwargs["config"]
-    assert len(config.tools) == 1 and config.tools[0].google_search is not None
-    assert config.automatic_function_calling.disable is True and client.budget.used == 1
+    kwargs = constructor.return_value.interactions.create.call_args.kwargs
+    assert kwargs["tools"] == [{"type": "google_search"}]
+    assert kwargs["input"] == "SYNTHETIC prompt" and client.budget.used == 1
+    constructor.return_value.models.generate_content.assert_not_called()
