@@ -1,0 +1,1253 @@
+{
+  "record_id": "ede79d558478b06032a66724",
+  "schema_version": "1.0",
+  "behavior": "SMS / OTP interception",
+  "sample": {
+    "app_name": "ExampleBanker",
+    "campaign_or_variant": "1.0",
+    "malware_family": "ExampleBanker",
+    "package_name": "com.example.banker",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  },
+  "sample_candidate": {
+    "family": "ExampleBanker",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "package_name": "com.example.banker",
+    "app_name": "ExampleBanker",
+    "variant": "1.0",
+    "identifier_strength": "SHA256",
+    "location_status": "VERIFIED",
+    "sources": [
+      {
+        "sample_page_url": "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "repository_page_url": null,
+        "download_page_url": null,
+        "repository_name": "SYNTHETIC sample catalog",
+        "sample_availability": "AVAILABLE",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "useful_for_manual_acquisition": true,
+        "evidence_scope": "HASH_LEVEL",
+        "notes": "SYNTHETIC exact-hash entry; no real sample exists."
+      }
+    ]
+  },
+  "discovered_candidate": {
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "package_name": "com.example.banker",
+    "app_name": "ExampleBanker",
+    "malware_family": "ExampleBanker",
+    "campaign_or_variant": "1.0",
+    "behavior_claim": null,
+    "evidence_scope": "HASH_LEVEL",
+    "publication_date": null,
+    "sample_reference": null,
+    "sources": [],
+    "analysis_sources": [
+      {
+        "title": "SYNTHETIC static analysis",
+        "url": "https://example.test/research/example-banker-static",
+        "source_type": "UNKNOWN",
+        "publication_date": null,
+        "evidence_category": "STATIC_ANALYSIS"
+      },
+      {
+        "title": "SYNTHETIC researcher demonstration",
+        "url": "https://example.test/demos/example-banker-runtime",
+        "source_type": "UNKNOWN",
+        "publication_date": null,
+        "evidence_category": "RESEARCHER_DEMONSTRATION"
+      },
+      {
+        "title": "SYNTHETIC existing sandbox report",
+        "url": "https://example.test/sandbox/reports/example-banker",
+        "source_type": "UNKNOWN",
+        "publication_date": null,
+        "evidence_category": "SANDBOX_EXECUTION"
+      }
+    ],
+    "sample_sources": []
+  },
+  "manifest_evidence": {
+    "permissions": [
+      {
+        "claim_id": "permission",
+        "kind": "permission",
+        "value": "android.permission.RECEIVE_SMS",
+        "evidence_scope": "HASH_LEVEL",
+        "sources": [
+          {
+            "title": "SYNTHETIC static analysis",
+            "url": "https://example.test/research/example-banker-static",
+            "source_type": "UNKNOWN",
+            "publication_date": null,
+            "evidence_category": "STATIC_ANALYSIS"
+          }
+        ],
+        "excerpt": "SYNTHETIC: android.permission.RECEIVE_SMS",
+        "class_name": null,
+        "method_name": null,
+        "original_scope": "HASH_LEVEL",
+        "evidence_status": "VERIFIED",
+        "verified_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "assessment": {
+          "claim_id": "permission",
+          "status": "VERIFIED",
+          "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+          "supporting_urls": [
+            "https://example.test/research/example-banker-static"
+          ],
+          "source_excerpt": "SYNTHETIC: android.permission.RECEIVE_SMS",
+          "supported_scope": "HASH_LEVEL",
+          "matched_identifiers": [
+            "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+            "com.example.banker"
+          ],
+          "identity_match": true,
+          "behavior_match": null
+        }
+      }
+    ],
+    "components": [
+      {
+        "claim_id": "receiver",
+        "kind": "component",
+        "value": "ExampleSmsReceiver handles SMS_RECEIVED",
+        "evidence_scope": "HASH_LEVEL",
+        "sources": [
+          {
+            "title": "SYNTHETIC static analysis",
+            "url": "https://example.test/research/example-banker-static",
+            "source_type": "UNKNOWN",
+            "publication_date": null,
+            "evidence_category": "STATIC_ANALYSIS"
+          }
+        ],
+        "excerpt": "SYNTHETIC: ExampleSmsReceiver handles SMS_RECEIVED",
+        "class_name": null,
+        "method_name": null,
+        "original_scope": "HASH_LEVEL",
+        "evidence_status": "VERIFIED",
+        "verified_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "assessment": {
+          "claim_id": "receiver",
+          "status": "VERIFIED",
+          "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+          "supporting_urls": [
+            "https://example.test/research/example-banker-static"
+          ],
+          "source_excerpt": "SYNTHETIC: ExampleSmsReceiver handles SMS_RECEIVED",
+          "supported_scope": "HASH_LEVEL",
+          "matched_identifiers": [
+            "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+            "com.example.banker"
+          ],
+          "identity_match": true,
+          "behavior_match": null
+        }
+      }
+    ]
+  },
+  "code_evidence": [
+    {
+      "claim_id": "method",
+      "kind": "method",
+      "value": "ExampleSmsReceiver.onReceive reads incoming message text",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads incoming message text",
+      "class_name": "ExampleSmsReceiver",
+      "method_name": "onReceive",
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "method",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads incoming message text",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "api",
+      "kind": "api",
+      "value": "SmsMessage.getMessageBody",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: SmsMessage.getMessageBody",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "api",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    }
+  ],
+  "behavior_relationships": [
+    {
+      "claim_id": "relationship",
+      "kind": "relationship",
+      "value": "ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC researcher demonstration",
+          "url": "https://example.test/demos/example-banker-runtime",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "RESEARCHER_DEMONSTRATION"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/demos/example-banker-runtime"
+      ],
+      "assessment": {
+        "claim_id": "relationship",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/demos/example-banker-runtime"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "hash",
+      "kind": "sha256",
+      "value": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "hash",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "package",
+      "kind": "package_name",
+      "value": "com.example.banker",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: com.example.banker",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "package",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: com.example.banker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "family",
+      "kind": "malware_family",
+      "value": "ExampleBanker",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleBanker",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "family",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleBanker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "app",
+      "kind": "app_name",
+      "value": "ExampleBanker",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleBanker",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "app",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleBanker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "variant",
+      "kind": "campaign_or_variant",
+      "value": "1.0",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: 1.0",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "variant",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: 1.0",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "behavior",
+      "kind": "behavior",
+      "value": "SMS / OTP interception: incoming messages are read",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: SMS / OTP interception: incoming messages are read",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "behavior",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: SMS / OTP interception: incoming messages are read",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": true
+      }
+    },
+    {
+      "claim_id": "permission",
+      "kind": "permission",
+      "value": "android.permission.RECEIVE_SMS",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: android.permission.RECEIVE_SMS",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "permission",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: android.permission.RECEIVE_SMS",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "receiver",
+      "kind": "component",
+      "value": "ExampleSmsReceiver handles SMS_RECEIVED",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleSmsReceiver handles SMS_RECEIVED",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "receiver",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver handles SMS_RECEIVED",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "method",
+      "kind": "method",
+      "value": "ExampleSmsReceiver.onReceive reads incoming message text",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads incoming message text",
+      "class_name": "ExampleSmsReceiver",
+      "method_name": "onReceive",
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "method",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads incoming message text",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "api",
+      "kind": "api",
+      "value": "SmsMessage.getMessageBody",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC static analysis",
+          "url": "https://example.test/research/example-banker-static",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "STATIC_ANALYSIS"
+        }
+      ],
+      "excerpt": "SYNTHETIC: SmsMessage.getMessageBody",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/example-banker-static"
+      ],
+      "assessment": {
+        "claim_id": "api",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "relationship",
+      "kind": "relationship",
+      "value": "ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC researcher demonstration",
+          "url": "https://example.test/demos/example-banker-runtime",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "RESEARCHER_DEMONSTRATION"
+        }
+      ],
+      "excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/demos/example-banker-runtime"
+      ],
+      "assessment": {
+        "claim_id": "relationship",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/demos/example-banker-runtime"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    },
+    {
+      "claim_id": "runtime",
+      "kind": "behavior",
+      "value": "SMS / OTP interception observed in an existing sandbox report",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC existing sandbox report",
+          "url": "https://example.test/sandbox/reports/example-banker",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "SANDBOX_EXECUTION"
+        }
+      ],
+      "excerpt": "SYNTHETIC: SMS / OTP interception observed in an existing sandbox report",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/sandbox/reports/example-banker"
+      ],
+      "assessment": {
+        "claim_id": "runtime",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/sandbox/reports/example-banker"
+        ],
+        "source_excerpt": "SYNTHETIC: SMS / OTP interception observed in an existing sandbox report",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": true
+      }
+    },
+    {
+      "claim_id": "location",
+      "kind": "sample_location",
+      "value": "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "evidence_scope": "HASH_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC catalog entry",
+          "url": "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "UNSPECIFIED"
+        }
+      ],
+      "excerpt": "SYNTHETIC: https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "HASH_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      ],
+      "assessment": {
+        "claim_id": "location",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        ],
+        "source_excerpt": "SYNTHETIC: https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "SYNTHETIC static analysis",
+      "url": "https://example.test/research/example-banker-static",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "STATIC_ANALYSIS",
+      "supports": [
+        "hash",
+        "package",
+        "family",
+        "app",
+        "variant",
+        "behavior",
+        "permission",
+        "receiver",
+        "method",
+        "api"
+      ]
+    },
+    {
+      "title": "SYNTHETIC researcher demonstration",
+      "url": "https://example.test/demos/example-banker-runtime",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "RESEARCHER_DEMONSTRATION",
+      "supports": [
+        "relationship"
+      ]
+    },
+    {
+      "title": "SYNTHETIC existing sandbox report",
+      "url": "https://example.test/sandbox/reports/example-banker",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "SANDBOX_EXECUTION",
+      "supports": [
+        "runtime"
+      ]
+    }
+  ],
+  "analysis_sources": [
+    {
+      "title": "SYNTHETIC static analysis",
+      "url": "https://example.test/research/example-banker-static",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "STATIC_ANALYSIS",
+      "supports": [
+        "hash",
+        "package",
+        "family",
+        "app",
+        "variant",
+        "behavior",
+        "permission",
+        "receiver",
+        "method",
+        "api"
+      ]
+    },
+    {
+      "title": "SYNTHETIC researcher demonstration",
+      "url": "https://example.test/demos/example-banker-runtime",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "RESEARCHER_DEMONSTRATION",
+      "supports": [
+        "relationship"
+      ]
+    },
+    {
+      "title": "SYNTHETIC existing sandbox report",
+      "url": "https://example.test/sandbox/reports/example-banker",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "SANDBOX_EXECUTION",
+      "supports": [
+        "runtime"
+      ]
+    }
+  ],
+  "sample_sources": [
+    {
+      "sample_page_url": "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "repository_page_url": null,
+      "download_page_url": null,
+      "repository_name": "SYNTHETIC sample catalog",
+      "sample_availability": "AVAILABLE",
+      "matched_identifiers": [
+        "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "com.example.banker"
+      ],
+      "useful_for_manual_acquisition": true,
+      "evidence_scope": "HASH_LEVEL",
+      "notes": "SYNTHETIC exact-hash entry; no real sample exists.",
+      "evidence_status": "VERIFIED",
+      "supports": [
+        "location"
+      ]
+    }
+  ],
+  "proof_of_concept": {
+    "behavior": "SMS / OTP interception",
+    "summary": "SMS / OTP interception: incoming messages are read; SMS / OTP interception observed in an existing sandbox report",
+    "permissions": [
+      {
+        "claim_id": "permission",
+        "evidence_type": "permission",
+        "value": "android.permission.RECEIVE_SMS",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "STATIC_ANALYSIS"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "claim_id": "receiver",
+        "evidence_type": "component",
+        "value": "ExampleSmsReceiver handles SMS_RECEIVED",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "STATIC_ANALYSIS"
+        ]
+      }
+    ],
+    "classes": [],
+    "api_calls": [
+      {
+        "claim_id": "api",
+        "evidence_type": "api",
+        "value": "SmsMessage.getMessageBody",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "STATIC_ANALYSIS"
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "claim_id": "method",
+        "evidence_type": "method",
+        "value": "ExampleSmsReceiver.onReceive reads incoming message text",
+        "class_name": "ExampleSmsReceiver",
+        "method_name": "onReceive",
+        "source_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "STATIC_ANALYSIS"
+        ]
+      }
+    ],
+    "strings": [],
+    "network": [],
+    "relationships": [
+      {
+        "claim_id": "relationship",
+        "evidence_type": "relationship",
+        "value": "ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/demos/example-banker-runtime"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "RESEARCHER_DEMONSTRATION"
+        ]
+      }
+    ],
+    "behavior_descriptions": [
+      {
+        "claim_id": "behavior",
+        "evidence_type": "behavior_description",
+        "value": "SMS / OTP interception: incoming messages are read",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "STATIC_ANALYSIS"
+        ]
+      },
+      {
+        "claim_id": "runtime",
+        "evidence_type": "behavior_description",
+        "value": "SMS / OTP interception observed in an existing sandbox report",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/sandbox/reports/example-banker"
+        ],
+        "evidence_scope": "HASH_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "SYNTHETIC offline fixture assertion; not live verification.",
+        "evidence_categories": [
+          "SANDBOX_EXECUTION"
+        ]
+      }
+    ],
+    "supporting_sources": [
+      "https://example.test/demos/example-banker-runtime",
+      "https://example.test/research/example-banker-static",
+      "https://example.test/sandbox/reports/example-banker"
+    ],
+    "behavior_proven": true,
+    "evidence_strength": "HIGH",
+    "limitations": []
+  },
+  "benchmark_ready": true,
+  "validation": {
+    "dataset_decision": "ACCEPT",
+    "evidence_strength": "HIGH",
+    "behavior_evidence_strength": "HIGH",
+    "sample_location_status": "VERIFIED",
+    "benchmark_ready": true,
+    "analyst_verified": false,
+    "rejection_reasons": [],
+    "assessments": [
+      {
+        "claim_id": "hash",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "package",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: com.example.banker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "family",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleBanker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "app",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleBanker",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "variant",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: 1.0",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "behavior",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: SMS / OTP interception: incoming messages are read",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": true
+      },
+      {
+        "claim_id": "permission",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: android.permission.RECEIVE_SMS",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "receiver",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver handles SMS_RECEIVED",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "method",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads incoming message text",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "api",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/research/example-banker-static"
+        ],
+        "source_excerpt": "SYNTHETIC: SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "relationship",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/demos/example-banker-runtime"
+        ],
+        "source_excerpt": "SYNTHETIC: ExampleSmsReceiver.onReceive reads message text via SmsMessage.getMessageBody",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      },
+      {
+        "claim_id": "runtime",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/sandbox/reports/example-banker"
+        ],
+        "source_excerpt": "SYNTHETIC: SMS / OTP interception observed in an existing sandbox report",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": true
+      },
+      {
+        "claim_id": "location",
+        "status": "VERIFIED",
+        "reason": "SYNTHETIC offline fixture assertion; not live verification.",
+        "supporting_urls": [
+          "https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        ],
+        "source_excerpt": "SYNTHETIC: https://example.test/samples/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "supported_scope": "HASH_LEVEL",
+        "matched_identifiers": [
+          "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "com.example.banker"
+        ],
+        "identity_match": true,
+        "behavior_match": null
+      }
+    ],
+    "model_decision": "ACCEPT"
+  },
+  "audit": {
+    "synthetic": true,
+    "notice": "SYNTHETIC example.test metadata. Not a real malware sample or live research."
+  }
+}

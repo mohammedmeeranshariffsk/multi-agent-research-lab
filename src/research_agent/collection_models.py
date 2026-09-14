@@ -4,9 +4,10 @@ from pathlib import Path
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-Scope = Literal["FAMILY_LEVEL", "SAMPLE_LEVEL"]
+Scope = Literal["FAMILY_LEVEL", "PACKAGE_LEVEL", "SAMPLE_LEVEL", "HASH_LEVEL"]
 Status = Literal["VERIFIED", "PARTIAL", "UNVERIFIED", "CONTRADICTED"]
-Kind = Literal["sha256", "package_name", "app_name", "malware_family", "campaign_or_variant", "behavior", "permission", "component", "class", "method", "api", "string", "relationship", "sample_location"]
+EvidenceCategory = Literal["STATIC_ANALYSIS", "RESEARCHER_DEMONSTRATION", "SANDBOX_EXECUTION", "FAMILY_CONTEXT", "UNSPECIFIED"]
+Kind = Literal["sha256", "package_name", "app_name", "malware_family", "campaign_or_variant", "behavior", "permission", "component", "class", "method", "api", "string", "network", "relationship", "sample_location"]
 
 class Model(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -16,6 +17,7 @@ class Source(Model):
     url: str
     source_type: str = "UNKNOWN"
     publication_date: str | None = None
+    evidence_category: EvidenceCategory = "UNSPECIFIED"
     @field_validator("url")
     @classmethod
     def public_url(cls, value):
@@ -105,10 +107,43 @@ class Assessment(Model):
     reason: str
     supporting_urls: list[str] = Field(default_factory=list)
     source_excerpt: str | None = None
+    supported_scope: Scope | None = None
+    matched_identifiers: list[str] = Field(default_factory=list)
+    identity_match: bool | None = None
+    behavior_match: bool | None = None
 
 class Validation(Model):
     assessments: list[Assessment] = Field(default_factory=list)
     dataset_decision: Literal["ACCEPT", "REJECT"] = "REJECT"
+
+class PocEvidence(Model):
+    claim_id: str
+    evidence_type: Literal["permission", "component", "class", "method", "api", "string", "network", "relationship", "behavior_description"]
+    value: str
+    class_name: str | None = None
+    method_name: str | None = None
+    source_urls: list[str] = Field(default_factory=list)
+    evidence_scope: Scope
+    validation_status: Status = "UNVERIFIED"
+    rationale: str = ""
+    evidence_categories: list[EvidenceCategory] = Field(default_factory=list)
+
+class ProofOfConcept(Model):
+    behavior: str
+    summary: str = ""
+    permissions: list[PocEvidence] = Field(default_factory=list)
+    components: list[PocEvidence] = Field(default_factory=list)
+    classes: list[PocEvidence] = Field(default_factory=list)
+    api_calls: list[PocEvidence] = Field(default_factory=list)
+    methods: list[PocEvidence] = Field(default_factory=list)
+    strings: list[PocEvidence] = Field(default_factory=list)
+    network: list[PocEvidence] = Field(default_factory=list)
+    relationships: list[PocEvidence] = Field(default_factory=list)
+    behavior_descriptions: list[PocEvidence] = Field(default_factory=list)
+    supporting_sources: list[str] = Field(default_factory=list)
+    behavior_proven: bool = False
+    evidence_strength: Literal["LOW", "MEDIUM", "HIGH"] = "LOW"
+    limitations: list[str] = Field(default_factory=list)
 
 def parse_json(text):
     text = text.strip()

@@ -1,0 +1,174 @@
+{
+  "record_id": "92a52516764ec41579c2bf23",
+  "schema_version": "1.0",
+  "behavior": "SMS / OTP interception",
+  "sample": {
+    "app_name": null,
+    "campaign_or_variant": null,
+    "malware_family": null,
+    "package_name": null,
+    "sha256": null
+  },
+  "sample_candidate": {
+    "family": null,
+    "sha256": null,
+    "package_name": null,
+    "app_name": null,
+    "variant": null,
+    "identifier_strength": "FAMILY_ONLY",
+    "location_status": "UNVERIFIED",
+    "sources": []
+  },
+  "discovered_candidate": {
+    "sha256": null,
+    "package_name": null,
+    "app_name": null,
+    "malware_family": "ExampleFamilyLead",
+    "campaign_or_variant": null,
+    "behavior_claim": null,
+    "evidence_scope": "FAMILY_LEVEL",
+    "publication_date": null,
+    "sample_reference": null,
+    "sources": [],
+    "analysis_sources": [],
+    "sample_sources": []
+  },
+  "manifest_evidence": {
+    "permissions": [],
+    "components": []
+  },
+  "code_evidence": [],
+  "behavior_relationships": [],
+  "claims": [
+    {
+      "claim_id": "family_context",
+      "kind": "behavior",
+      "value": "SMS / OTP interception",
+      "evidence_scope": "FAMILY_LEVEL",
+      "sources": [
+        {
+          "title": "SYNTHETIC family context",
+          "url": "https://example.test/research/family-context",
+          "source_type": "UNKNOWN",
+          "publication_date": null,
+          "evidence_category": "FAMILY_CONTEXT"
+        }
+      ],
+      "excerpt": null,
+      "class_name": null,
+      "method_name": null,
+      "original_scope": "FAMILY_LEVEL",
+      "evidence_status": "VERIFIED",
+      "verified_urls": [
+        "https://example.test/research/family-context"
+      ],
+      "assessment": {
+        "claim_id": "family_context",
+        "status": "VERIFIED",
+        "reason": "Family context only.",
+        "supporting_urls": [
+          "https://example.test/research/family-context"
+        ],
+        "source_excerpt": "SYNTHETIC family claim",
+        "supported_scope": "FAMILY_LEVEL",
+        "matched_identifiers": [],
+        "identity_match": null,
+        "behavior_match": null
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "SYNTHETIC family context",
+      "url": "https://example.test/research/family-context",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "FAMILY_CONTEXT",
+      "supports": [
+        "family_context"
+      ]
+    }
+  ],
+  "analysis_sources": [
+    {
+      "title": "SYNTHETIC family context",
+      "url": "https://example.test/research/family-context",
+      "source_type": "UNKNOWN",
+      "publication_date": null,
+      "evidence_category": "FAMILY_CONTEXT",
+      "supports": [
+        "family_context"
+      ]
+    }
+  ],
+  "sample_sources": [],
+  "proof_of_concept": {
+    "behavior": "SMS / OTP interception",
+    "summary": "Behavior not proven for this sample.",
+    "permissions": [],
+    "components": [],
+    "classes": [],
+    "api_calls": [],
+    "methods": [],
+    "strings": [],
+    "network": [],
+    "relationships": [],
+    "behavior_descriptions": [
+      {
+        "claim_id": "family_context",
+        "evidence_type": "behavior_description",
+        "value": "SMS / OTP interception",
+        "class_name": null,
+        "method_name": null,
+        "source_urls": [
+          "https://example.test/research/family-context"
+        ],
+        "evidence_scope": "FAMILY_LEVEL",
+        "validation_status": "VERIFIED",
+        "rationale": "Family context only.",
+        "evidence_categories": [
+          "FAMILY_CONTEXT"
+        ]
+      }
+    ],
+    "supporting_sources": [],
+    "behavior_proven": false,
+    "evidence_strength": "LOW",
+    "limitations": [
+      "No verified requested behavior linked to concrete sample identity."
+    ]
+  },
+  "benchmark_ready": false,
+  "validation": {
+    "dataset_decision": "REJECT",
+    "evidence_strength": "LOW",
+    "behavior_evidence_strength": "LOW",
+    "sample_location_status": "UNVERIFIED",
+    "benchmark_ready": false,
+    "analyst_verified": false,
+    "rejection_reasons": [
+      "No independently verified concrete sample identity.",
+      "No independently verified, manually usable sample acquisition page.",
+      "No verified requested behavior linked to concrete sample identity."
+    ],
+    "assessments": [
+      {
+        "claim_id": "family_context",
+        "status": "VERIFIED",
+        "reason": "Family context only.",
+        "supporting_urls": [
+          "https://example.test/research/family-context"
+        ],
+        "source_excerpt": "SYNTHETIC family claim",
+        "supported_scope": "FAMILY_LEVEL",
+        "matched_identifiers": [],
+        "identity_match": null,
+        "behavior_match": null
+      }
+    ],
+    "model_decision": "REJECT"
+  },
+  "audit": {
+    "synthetic": true
+  }
+}

@@ -14,9 +14,30 @@
     "claims",
     "validation",
     "analysis_sources",
-    "sample_sources"
+    "sample_sources",
+    "sample_candidate",
+    "proof_of_concept",
+    "benchmark_ready",
+    "audit"
   ],
   "properties": {
+    "sample_candidate": {
+      "type": "object",
+      "required": ["family", "sha256", "package_name", "sources", "identifier_strength", "location_status"],
+      "properties": {"sources": {"type": "array"}, "location_status": {"enum": ["VERIFIED", "PARTIAL", "UNVERIFIED"]}}
+    },
+    "proof_of_concept": {
+      "type": "object",
+      "required": ["behavior", "summary", "behavior_proven", "evidence_strength", "supporting_sources", "behavior_descriptions", "limitations"],
+      "properties": {
+        "behavior_proven": {"type": "boolean"},
+        "evidence_strength": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+        "supporting_sources": {"type": "array", "items": {"type": "string"}},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "benchmark_ready": {"type": "boolean"},
+    "audit": {"type": "object"},
     "record_id": {
       "type": "string"
     },
@@ -122,9 +143,17 @@
       "required": [
         "dataset_decision",
         "evidence_strength",
+        "behavior_evidence_strength",
+        "sample_location_status",
+        "benchmark_ready",
+        "rejection_reasons",
         "analyst_verified"
       ],
       "properties": {
+        "behavior_evidence_strength": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+        "sample_location_status": {"enum": ["VERIFIED", "PARTIAL", "UNVERIFIED"]},
+        "benchmark_ready": {"type": "boolean"},
+        "rejection_reasons": {"type": "array", "items": {"type": "string"}},
         "dataset_decision": {
           "enum": [
             "ACCEPT",
@@ -210,6 +239,8 @@
           "sample_availability": {
             "enum": [
               "AVAILABLE",
+              "LOGIN_REQUIRED",
+              "REMOVED",
               "REQUIRES_ACCESS",
               "UNAVAILABLE",
               "UNKNOWN"
