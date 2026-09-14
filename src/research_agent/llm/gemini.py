@@ -122,6 +122,7 @@ class GeminiClient:
             )
 
         self.budget.consume()
+        logger.info("[analysis] model=%s grounded=false", settings.gemini_model)
 
         full_prompt = f"""
 {prompt}

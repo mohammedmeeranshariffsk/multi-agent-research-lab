@@ -8,6 +8,7 @@ from research_agent.state import RequestBudget
 from research_agent.collection_models import Candidate, Claim, Investigation, Validation, Assessment, Source, SampleSource
 from research_agent.agents.sample_discovery import parse_candidates
 from research_agent.agents.evidence_validator import parse_validation
+from research_agent.agents.evidence_validator import validate_evidence
 from research_agent.agents.dataset_synthesizer import synthesize_record
 from research_agent.collection_orchestrator import run_collection
 
@@ -71,6 +72,22 @@ def test_bad_decisions(text):
 def test_decision():
     assert parse_validation('{"dataset_decision":"ACCEPT"}\nDATASET_DECISION: ACCEPT').dataset_decision == "ACCEPT"
 
+def test_validator_uses_non_grounded_analysis_with_collected_evidence():
+    investigation, _ = fixture_evidence()
+    candidate = Candidate(sha256="a" * 64)
+    validation_text = '{"dataset_decision":"REJECT"}\nDATASET_DECISION: REJECT'
+    class AnalysisOnly:
+        def __init__(self): self.evidence = None
+        def analyze_evidence(self, prompt, evidence):
+            self.evidence = evidence
+            return validation_text
+        def generate_grounded(self, prompt):
+            raise AssertionError("validator must not search")
+    client = AnalysisOnly()
+    result, _ = validate_evidence(candidate, "SMS interception", investigation, client)
+    assert result.dataset_decision == "REJECT"
+    assert "a" * 64 in client.evidence and "sample_sources" in client.evidence
+
 def fixture_evidence(scope="SAMPLE_LEVEL"):
     source = Source(url="https://example.org/report")
     claims = [Claim(claim_id="hash", kind="sha256", value="a"*64, evidence_scope=scope, sources=[source]), Claim(claim_id="behavior", kind="behavior", value="SMS interception", evidence_scope=scope, sources=[source])]
@@ -106,6 +123,9 @@ def test_collection_saves_and_stops(tmp_path):
         def generate_grounded(self, prompt):
             self.budget.consume()
             return next(responses)
+        def analyze_evidence(self, prompt, evidence):
+            self.budget.consume()
+            return next(responses).text
     job = run_collection("SMS interception", tmp_path, client=Fake())
     assert job["requests_used"] == 4 and not job["errors"]
     assert len(job["records"]) == 1

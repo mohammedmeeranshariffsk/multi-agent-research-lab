@@ -233,6 +233,14 @@ class OfflineClient:
             text = validation.model_dump_json() + "\nDATASET_DECISION: ACCEPT"
         return GroundedResult(text, [], [])
 
+    def analyze_evidence(self, prompt, evidence):
+        self.budget.consume()
+        self.calls += 1
+        if self.calls == self.fail_at:
+            raise RuntimeError("SYNTHETIC stage failure")
+        candidate, investigation, validation = fixture()
+        return validation.model_dump_json() + "\nDATASET_DECISION: ACCEPT"
+
 
 @pytest.mark.parametrize("stage,call", [("investigation", 2), ("sample_locator", 3), ("validation", 4)])
 def test_stage_failures_preserve_every_rejected_record(tmp_path, stage, call):

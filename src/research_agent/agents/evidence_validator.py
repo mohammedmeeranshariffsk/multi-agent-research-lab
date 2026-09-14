@@ -1,3 +1,4 @@
+import json
 import re
 from research_agent.collection_models import Validation, parse_json, prompt
 
@@ -15,7 +16,17 @@ def parse_validation(text):
     return result
 
 def validate_evidence(candidate, behavior, investigation, client):
-    result = client.generate_grounded(prompt("evidence_validator", {"behavior": behavior, "candidate": candidate.model_dump(), "investigation": investigation.model_dump(), "output_schema": Validation.model_json_schema()}))
+    request = prompt("evidence_validator", {"behavior": behavior, "candidate": candidate.model_dump(), "investigation": investigation.model_dump(), "output_schema": Validation.model_json_schema()})
+    evidence = json.dumps({
+        "candidate": candidate.model_dump(),
+        "investigation": investigation.model_dump(),
+        "sample_sources": [s.model_dump() for s in investigation.sample_sources],
+        "behavior": behavior,
+    }, ensure_ascii=False)
+    result_text = client.analyze_evidence(request, evidence)
+    # Keep the parser's existing audit/error contract without introducing search metadata.
+    from research_agent.llm.gemini import GroundedResult
+    result = GroundedResult(result_text, [], [])
     try:
         return parse_validation(result.text), result
     except ValueError as exc:
