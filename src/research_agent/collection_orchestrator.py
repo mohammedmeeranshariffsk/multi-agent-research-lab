@@ -12,7 +12,7 @@ from research_agent.agents.dataset_synthesizer import synthesize_record
 from research_agent.collection_models import Claim, Source, Investigation, Validation, grounded_payload
 from research_agent.sample_normalizer import candidate_to_sample_candidate, normalize_candidates
 from research_agent.reporting import render_report
-from research_agent.llm.groq import ResearchClient
+from research_agent.llm.gemini import GeminiClient
 from research_agent.state import RequestBudget
 
 MAX_RESEARCH_REQUESTS = 12
@@ -24,7 +24,7 @@ def run_collection(behavior, output_dir="data", limit=5, max_requests=12, client
     if not 1 <= max_requests <= MAX_RESEARCH_REQUESTS:
         raise ValueError("max_requests must be between 1 and 12")
     budget = RequestBudget(maximum=max_requests)
-    client = client or ResearchClient(budget)
+    client = client or GeminiClient(budget)
     client.budget = budget
     root = Path(output_dir)
     for folder in ("schemas", "candidates", "validated", "rejected"):
