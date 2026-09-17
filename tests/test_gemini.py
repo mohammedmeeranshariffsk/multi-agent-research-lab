@@ -8,7 +8,17 @@ from google.genai import interactions, types
 
 from research_agent.config import settings
 from research_agent.llm.gemini import GeminiClient, _parse_interaction
+from research_agent.llm.groq import _parse_response
 from research_agent.state import RequestBudget
+
+def test_groq_nested_browser_results_are_provenance_sources():
+    response = {"choices": [{"message": {"content": "FluBot evidence", "executed_tools": [
+        {"name": "browser.search", "type": "browser_search", "arguments": '{"query":"FluBot SMS OTP"}',
+         "search_results": {"results": [{"title": "MITRE", "url": "https://attack.mitre.org/software/S1067/", "content": "SMS"}]}}
+    ]}}]}
+    parsed = _parse_response(response)
+    assert parsed.sources == [{"title": "MITRE", "url": "https://attack.mitre.org/software/S1067/"}]
+    assert parsed.search_queries == ["FluBot SMS OTP"]
 
 
 def sdk_response():
