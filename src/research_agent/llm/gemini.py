@@ -1,5 +1,8 @@
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from google import genai
 from google.genai import types
@@ -36,6 +39,7 @@ class GeminiClient:
         self.client = genai.Client(
             api_key=settings.gemini_api_key,
             http_options=types.HttpOptions(
+                timeout=settings.gemini_timeout_seconds * 1000,
                 retry_options=types.HttpRetryOptions(attempts=1),
             ),
         )
@@ -96,7 +100,9 @@ class GeminiClient:
             input=prompt,
             tools=[{"type": "google_search"}],
         )
+
         result = _parse_interaction(response)
+        result.sources = _canonical_sources(result.sources)
         logger.info("[grounded] sources=%d", len(result.sources))
         return result
 
@@ -155,6 +161,9 @@ Do not invent:
         response = self.client.models.generate_content(
             model=settings.gemini_model,
             contents=full_prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+            ),
         )
 
         return response.text or ""
@@ -163,6 +172,42 @@ Do not invent:
 def _field(value, name, default=None):
     """Support SDK objects as well as model_dump dictionaries."""
     return value.get(name, default) if isinstance(value, dict) else getattr(value, name, default)
+
+
+class _NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def _canonical_sources(sources):
+    """Resolve only Google's citation headers; never request the destination page/binary."""
+    resolved = {}
+    attempts = 0
+    opener = build_opener(_NoRedirect())
+    for source in sources:
+        url = source["url"]
+        parsed = urlsplit(url)
+        item = dict(source)
+        if (parsed.scheme == "https" and parsed.hostname == "vertexaisearch.cloud.google.com"
+                and parsed.path.startswith("/grounding-api-redirect/") and not parsed.username
+                and attempts < 8):
+            attempts += 1
+            try:
+                response = opener.open(Request(url, method="HEAD"), timeout=3)
+                response.close()
+            except HTTPError as exc:
+                target = exc.headers.get("Location", "")
+                exc.close()
+                destination = urlsplit(target)
+                if (exc.code in {301, 302, 303, 307, 308} and destination.scheme in {"https", "http"}
+                        and destination.hostname and not destination.username
+                        and destination.hostname != "vertexaisearch.cloud.google.com"
+                        and not destination.path.lower().endswith((".apk", ".zip"))):
+                    item = {**source, "url": target, "original_url": url}
+            except (URLError, TimeoutError, ValueError):
+                pass  # An unresolved citation remains unusable for final article proof.
+        resolved.setdefault(item["url"], item)
+    return list(resolved.values())
 
 
 def _items(value):
@@ -181,6 +226,8 @@ def _parse_interaction(response) -> GroundedResult:
                 if isinstance(query, str) and query and query not in queries:
                     queries.append(query)
         if _field(step, "type") != "model_output":
+            if _field(step, "type") == "google_search_result":
+                _collect_search_sources(_field(step, "result"), sources)
             continue
         for content in _items(_field(step, "content")):
             if _field(content, "type") != "text":
@@ -207,3 +254,24 @@ def _parse_interaction(response) -> GroundedResult:
         sources=list(sources.values()),
         search_queries=queries,
     )
+
+
+def _collect_search_sources(value, sources):
+    """Collect URLs only from structured Google Search result records."""
+    if not isinstance(value, (dict, list, tuple)) and hasattr(value, "model_dump"):
+        value = value.model_dump()
+    if isinstance(value, (list, tuple)):
+        for item in value:
+            _collect_search_sources(item, sources)
+        return
+    if not isinstance(value, dict):
+        return
+    url = value.get("url")
+    if isinstance(url, str) and url.strip() and "grounding-api-redirect" not in url:
+        title = value.get("title")
+        entry = {"title": title if isinstance(title, str) else "", "url": url.strip()}
+        existing = sources.get(entry["url"])
+        if existing is None or (not existing["title"] and entry["title"]):
+            sources[entry["url"]] = entry
+    for key in ("search_results", "results"):
+        _collect_search_sources(value.get(key), sources)

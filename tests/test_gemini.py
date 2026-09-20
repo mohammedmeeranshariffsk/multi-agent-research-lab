@@ -1,5 +1,6 @@
 from types import SimpleNamespace as NS
 from unittest.mock import Mock
+from urllib.error import HTTPError
 
 import httpx
 import pytest
@@ -7,7 +8,11 @@ from google import genai
 from google.genai import interactions, types
 
 from research_agent.config import settings
-from research_agent.llm.gemini import GeminiClient, _parse_interaction
+from research_agent.llm.gemini import (
+    GeminiClient,
+    _canonical_sources,
+    _parse_interaction,
+)
 from research_agent.state import RequestBudget
 
 
@@ -39,6 +44,40 @@ def test_output_text_preferred_over_step_text():
     response = sdk_response()
     response.output_text = "Preferred final answer."
     assert _parse_interaction(response).text == "Preferred final answer."
+
+
+@pytest.mark.parametrize("target,accepted", [("https://example.test/analysis", True),
+                                          ("https://example.test/sample.apk", False)])
+def test_citation_canonicalization_only_requests_google_headers(monkeypatch, target, accepted):
+    redirect = "https://vertexaisearch.cloud.google.com/grounding-api-redirect/test"
+    opener = Mock()
+    opener.open.side_effect = HTTPError(redirect, 302, "Found", {"Location": target}, None)
+    monkeypatch.setattr("research_agent.llm.gemini.build_opener", Mock(return_value=opener))
+    result = _canonical_sources([{"url": redirect, "title": "Report"}])
+    assert result[0]["url"] == (target if accepted else redirect)
+    assert opener.open.call_count == 1
+    request = opener.open.call_args.args[0]
+    assert request.full_url == redirect and request.get_method() == "HEAD"
+    assert opener.open.call_args.kwargs["timeout"] == 3
+
+
+def test_no_redirect_handler_never_follows_destination():
+    from research_agent.llm.gemini import _NoRedirect
+    assert _NoRedirect().redirect_request(None, None, 302, "Found", {}, "https://example.test/sample.apk") is None
+
+
+def test_structured_search_results_supply_sources_without_annotations():
+    response = NS(output_text="Answer", steps=[
+        NS(type="google_search_call", arguments=NS(queries=["sample hash"])),
+        NS(type="google_search_result", result={"search_results": {"results": [
+            {"title": "Analysis", "url": "https://example.test/report", "content": "hash"},
+            {"title": "Analysis", "url": "https://example.test/report", "content": "duplicate"},
+        ]}}),
+        NS(type="model_output", content=[NS(type="text", text="Answer", annotations=None)]),
+    ])
+    result = _parse_interaction(response)
+    assert result.sources == [{"title": "Analysis", "url": "https://example.test/report"}]
+    assert result.search_queries == ["sample hash"]
 
 
 def test_missing_and_malformed_optional_metadata():

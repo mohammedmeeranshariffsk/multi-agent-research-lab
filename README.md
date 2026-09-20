@@ -1,59 +1,37 @@
-# Android sample references and matching evidence
+# Android Malware Intelligence Reference
 
-The primary result is a short Markdown table:
+Level 1 collects public metadata into `data/android_malware_reference.md`:
 
-| Sample | APK acquisition link | Matching evidence and useful checks |
-| --- | --- | --- |
-| Family — package, plus SHA256 when documented | Concrete sample page, including access requirements | Clickable evidence, concise documented behavior, evidence type and match scope |
+| Malware / sample | Malware family | Static-analysis article | Package name | Digest/hash | Static/code findings | Status |
+| --- | --- | --- | --- | --- | --- | --- |
 
-Only complete supported rows appear in the table. Family-only and incomplete leads appear below it with missing-evidence reasons. Detailed JSON preserves hypotheses, citations, independent assessments, effective scope, proof evidence and audit responses.
+## Flow
 
-See the [SYNTHETIC example report](examples/synthetic/report.md) and [example JSON](examples/synthetic/example-banker.json). These are offline fixtures using example.test, not real malware research.
+Discovery → Investigation → Validation → Report.
+
+Discovery requests a bounded candidate pool (up to four candidates for `--limit 1`). Investigation collects available article excerpts, identifiers and static/code findings, including for candidates that initially lack identifiers. Both stages use `GEMINI_RESEARCH_MODEL` with Google Search. Validation uses `GEMINI_MODEL` without browsing. Every usable discovered candidate is retained in the report, including candidates whose investigation or validation failed. One candidate failure does not stop later candidates.
+
+COMPLETE requires a grounded canonical static-analysis article linking a supported family, package or valid SHA256/SHA1/MD5, and meaningful code findings. Existing claim-ID, source-agreement, scope, identity and contradiction checks remain authoritative; different excerpt wording alone does not invalidate evidence. PARTIAL means investigation collected technical sources or findings but completeness checks are not satisfied. DISCOVERED means discovery metadata is available, without useful technical evidence from investigation. Missing fields render as `—`. Metadata outside a complete article is labeled collected or discovered; detailed claims, assessments, source URLs and errors stay in memory. Analyst verification remains manual.
+
+No acquisition link or downloadable APK is required. Sample Locator and the obsolete acquisition/proof pipeline have been removed. No malware is downloaded, installed, executed or decompiled. Article cells exclude grounding redirects and APK/ZIP URLs, preferring resolved canonical citations.
 
 ## Run
 
-Install the project and test dependencies with `pip install -e ".[dev]"`. Configure `GEMINI_API_KEY`, `GEMINI_MODEL` and `GEMINI_RESEARCH_MODEL` in your local `.env`. Grounded research uses only Google Search. A job is capped at 12 requests, SDK retries and automatic function loops are disabled, and external failures stop further research while preserving remaining leads.
+Install with `pip install -e ".[dev]"`. Configure model names and credentials locally using `.env.example`; never commit credentials.
 
 ```powershell
-$env:PYTHONPATH = "src"
-..\venv\Scripts\python.exe -m research_agent.collection_orchestrator --behavior "SMS / OTP / Notification Interception" --limit 1
+python -m research_agent.collection_orchestrator --behavior "Android malware" --limit 1
 ```
 
-Pipeline: discovery → candidate parsing/source preservation → investigation → sample location → SampleCandidate conversion/normalization → independent validation → deterministic proof construction → record synthesis → JSON and Markdown.
+Run from the repository directory: the output path is relative to the current working directory. `--limit` sizes the discovery pool; it no longer stops processing after a target number of complete rows. Discovery costs one model request, then investigation and validation normally cost two per candidate while budget remains. Candidates that cannot be investigated within the budget still appear with their available metadata. Every API attempt consumes budget. Validation alone has one bounded retry for HTTP 500/502/503/504.
 
-The normalizer merges compatible hash/package/variant references and retains unique acquisition URLs. Conflicting hashes and ambiguous package-to-multiple-hash references remain separate. Family-only references never serve as an identity merge key. Analysis sources are not acquisition sources.
+Normal runtime writes only the Markdown report. No candidate/job/audit/proof JSON files are generated. Internal exception details remain in console output and returned records, outside the report. Compatibility counters (`accepted`, `rejected`, `benchmark_ready`) describe completeness checks and do not control report visibility.
 
-## Acceptance and evidence
-
-ACCEPT / benchmark-ready requires verified concrete identity, a separately verified usable acquisition page, verified requested behavior linked to the identity, and no critical identity or behavior contradiction. Missing, removed and unavailable acquisition locations reject. Access-controlled locations retain their explicit access status. A model recommendation cannot override these checks.
-
-Scope is HASH_LEVEL > SAMPLE_LEVEL > PACKAGE_LEVEL > FAMILY_LEVEL. Validation may downgrade it, never upgrade it. Proof construction uses exact claim/assessment citation intersections. Explicit mismatches reject support; for legacy assessments without matched identifiers, behavior linkage requires a verified identity claim on the same cited page. Legacy independently verified SAMPLE_LEVEL acquisition claims remain supported; mere locator assertions do not count.
-
-A permission alone never proves behavior. When technical claims are supplied, at least one must be independently verified and linked. If no technical details are documented, concrete verified behavior can be MEDIUM, with an explicit limitation. HIGH additionally requires verified technical evidence and at least two distinct supporting page URLs. This is a corroboration heuristic, not a guarantee of independent confirmation. Otherwise evidence strength is LOW.
-
-The report distinguishes static analysis, researcher demonstration/runtime PoC and existing sandbox execution. It does not guess an evidence type. Unclassified evidence stays in JSON/leads. Family context never becomes proof for an exact APK. Package/variant matching is weaker than exact SHA256 matching.
-
-`analyst_verified` always starts false. Benchmark-ready means eligible for manual benchmark review, not independently reproduced execution.
-
-## Outputs and offline verification
-
-- `data/candidates/`: accepted records awaiting analyst review, job audit JSON and Markdown reports.
-- `data/rejected/`: partial/rejected records with reasons and available evidence.
-- `data/validated/`: reserved for explicit manual analyst review.
-- `data/schemas/record.schema.json`: output schema.
-
-Generate the safe fixture and run the complete tests:
+## Offline checks
 
 ```powershell
-$env:PYTHONPATH = "src"
-..\venv\Scripts\python.exe -m tests.fixtures.example_banker
-..\venv\Scripts\python.exe -m pytest -q
+python -m pytest -q
+python -m ruff check src tests
 ```
 
-The fixture generator makes no model or network calls. Tests mock the research calls; synthetic data must never be represented as live collection.
-
-## Boundaries and limitations
-
-This project records metadata only: it never downloads, opens, executes, decompiles or analyzes APKs. It is not a detector, downloader, emulator or sandbox integration. Existing sandbox reports and public demonstrations are citations only.
-
-Public searches are incomplete. Grounding metadata and independent model assessments do not replace human source review, and provider redirects may prevent canonical URL corroboration. Availability and package-level attribution can change; exact hash links are preferable. A failed discovery response is retained in the job audit. Stage failures after discovery preserve rejected candidates without retry loops.
+Synthetic fixtures use example.test and are not real malware research.

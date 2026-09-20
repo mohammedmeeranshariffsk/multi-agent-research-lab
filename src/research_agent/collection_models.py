@@ -2,12 +2,13 @@
 import json
 from pathlib import Path
 from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 Scope = Literal["FAMILY_LEVEL", "PACKAGE_LEVEL", "SAMPLE_LEVEL", "HASH_LEVEL"]
 Status = Literal["VERIFIED", "PARTIAL", "UNVERIFIED", "CONTRADICTED"]
 EvidenceCategory = Literal["STATIC_ANALYSIS", "RESEARCHER_DEMONSTRATION", "SANDBOX_EXECUTION", "FAMILY_CONTEXT", "UNSPECIFIED"]
-Kind = Literal["sha256", "package_name", "app_name", "malware_family", "campaign_or_variant", "behavior", "permission", "component", "class", "method", "api", "string", "network", "relationship", "sample_location"]
+Kind = Literal["sha256", "sha1", "md5", "package_name", "app_name", "malware_family", "campaign_or_variant", "behavior", "permission", "component", "class", "method", "api", "string", "network", "relationship"]
 
 class Model(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -25,44 +26,10 @@ class Source(Model):
             raise ValueError("source must be an HTTP(S) URL")
         return value
 
-class SampleSource(Model):
-    sample_page_url: str | None = None
-    repository_page_url: str | None = None
-    download_page_url: str | None = None
-    repository_name: str | None = None
-    sample_availability: Literal["AVAILABLE", "REQUIRES_ACCESS", "LOGIN_REQUIRED", "REMOVED", "UNAVAILABLE", "UNKNOWN"] = "UNKNOWN"
-    matched_identifiers: list[str] = Field(default_factory=list)
-    useful_for_manual_acquisition: bool = False
-    evidence_scope: Literal["SAMPLE_LEVEL", "PACKAGE_LEVEL", "HASH_LEVEL", "FAMILY_LEVEL"] = "FAMILY_LEVEL"
-    notes: str = ""
-
-    @field_validator("sample_page_url", "repository_page_url", "download_page_url", "repository_name", mode="before")
-    @classmethod
-    def unknown(cls, value):
-        return None if isinstance(value, str) and value.strip().upper() in {"", "UNKNOWN", "NULL", "N/A"} else value
-
-    @field_validator("sample_page_url", "repository_page_url", "download_page_url")
-    @classmethod
-    def public_url(cls, value):
-        if value is not None:
-            normalized = value.strip()
-            if normalized.lower().startswith(("https://", "http://")):
-                return normalized
-            Source.public_url(value)
-        return value
-
-class SampleCandidate(Model):
-    family: str | None = None
-    sha256: str | None = None
-    package_name: str | None = None
-    app_name: str | None = None
-    variant: str | None = None
-    identifier_strength: Literal["SHA256", "PACKAGE_NAME", "APP_PLUS_VARIANT", "FAMILY_PLUS_VARIANT", "FAMILY_ONLY"] = "FAMILY_ONLY"
-    location_status: Literal["UNVERIFIED", "PARTIAL", "VERIFIED"] = "UNVERIFIED"
-    sources: list[SampleSource] = Field(default_factory=list)
-
 class Candidate(Model):
     sha256: str | None = None
+    sha1: str | None = None
+    md5: str | None = None
     package_name: str | None = None
     app_name: str | None = None
     malware_family: str | None = None
@@ -71,9 +38,8 @@ class Candidate(Model):
     evidence_scope: Scope = "FAMILY_LEVEL"
     publication_date: str | None = None
     sample_reference: str | None = None
-    sources: list[Source] = Field(default_factory=list)  # Legacy analysis citations.
+    sources: list[Source] = Field(default_factory=list)
     analysis_sources: list[Source] = Field(default_factory=list)
-    sample_sources: list[SampleSource] = Field(default_factory=list)
     @field_validator("sha256", "package_name", "app_name", "malware_family", "campaign_or_variant", "behavior_claim", "publication_date", "sample_reference", mode="before")
     @classmethod
     def unknown(cls, value):
@@ -84,6 +50,16 @@ class Candidate(Model):
         if value is not None:
             if len(value) != 64 or any(c not in "0123456789abcdefABCDEF" for c in value):
                 raise ValueError("invalid SHA256")
+            return value.lower()
+        return value
+
+    @field_validator("sha1", "md5")
+    @classmethod
+    def other_hash_format(cls, value, info):
+        if value is not None:
+            length = 40 if info.field_name == "sha1" else 32
+            if len(value) != length or any(c not in "0123456789abcdefABCDEF" for c in value):
+                raise ValueError("invalid " + info.field_name)
             return value.lower()
         return value
 
@@ -98,7 +74,6 @@ class Claim(Model):
     method_name: str | None = None
 
 class Investigation(Model):
-    sample_sources: list[SampleSource] = Field(default_factory=list)
     claims: list[Claim] = Field(default_factory=list)
 
 class Assessment(Model):
@@ -115,35 +90,6 @@ class Assessment(Model):
 class Validation(Model):
     assessments: list[Assessment] = Field(default_factory=list)
     dataset_decision: Literal["ACCEPT", "REJECT"] = "REJECT"
-
-class PocEvidence(Model):
-    claim_id: str
-    evidence_type: Literal["permission", "component", "class", "method", "api", "string", "network", "relationship", "behavior_description"]
-    value: str
-    class_name: str | None = None
-    method_name: str | None = None
-    source_urls: list[str] = Field(default_factory=list)
-    evidence_scope: Scope
-    validation_status: Status = "UNVERIFIED"
-    rationale: str = ""
-    evidence_categories: list[EvidenceCategory] = Field(default_factory=list)
-
-class ProofOfConcept(Model):
-    behavior: str
-    summary: str = ""
-    permissions: list[PocEvidence] = Field(default_factory=list)
-    components: list[PocEvidence] = Field(default_factory=list)
-    classes: list[PocEvidence] = Field(default_factory=list)
-    api_calls: list[PocEvidence] = Field(default_factory=list)
-    methods: list[PocEvidence] = Field(default_factory=list)
-    strings: list[PocEvidence] = Field(default_factory=list)
-    network: list[PocEvidence] = Field(default_factory=list)
-    relationships: list[PocEvidence] = Field(default_factory=list)
-    behavior_descriptions: list[PocEvidence] = Field(default_factory=list)
-    supporting_sources: list[str] = Field(default_factory=list)
-    behavior_proven: bool = False
-    evidence_strength: Literal["LOW", "MEDIUM", "HIGH"] = "LOW"
-    limitations: list[str] = Field(default_factory=list)
 
 def parse_json(text):
     text = text.strip()

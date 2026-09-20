@@ -11,6 +11,16 @@ __pycache__/
 
 outputs/*
 !outputs/.gitkeep
+# Generated collection output and artifacts from older runs.
+data/android_malware_reference.md
+data/candidates/
+data/rejected/
+data/validated/
+data/jobs/
+data/audits/
+data/proofs/
+data/job-*.json
+data/job-*.md
 
 dist/
 build/
