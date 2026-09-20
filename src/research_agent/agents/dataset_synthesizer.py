@@ -1,63 +1,81 @@
-"""Deterministic synthesis: never generates new facts or makes API calls."""
-from hashlib import sha256
-import json
-from research_agent.collection_models import Candidate
+"""Deterministic metadata synthesis; acceptance never comes from a model vote."""
+import re
+from urllib.parse import urlsplit
 
-def synthesize_record(candidate, behavior, investigation, validation):
-    assessments = {a.claim_id: a for a in validation.assessments}
-    evidence = []
-    sources = {}
-    for claim in investigation.claims:
-        a = assessments.get(claim.claim_id)
-        urls = {s.url for s in claim.sources}
-        supported = bool(a and a.status == "VERIFIED" and claim.value.strip().upper() not in {"", "UNKNOWN", "NULL", "N/A"} and a.source_excerpt and urls.intersection(a.supporting_urls))
-        status = a.status if a else "UNVERIFIED"
-        if status == "VERIFIED" and not supported:
-            status = "UNVERIFIED"
-        item = claim.model_dump()
-        item["evidence_status"] = status
-        evidence.append(item)
-        for source in (claim.sources if claim.kind != "sample_location" else []):
-            entry = sources.setdefault(source.url, {**source.model_dump(), "supports": []})
-            entry["supports"].append(claim.claim_id)
-    sample = {k: None for k in ("sha256", "package_name", "app_name", "malware_family", "campaign_or_variant")}
-    for key in sample:
-        values = {e["value"] for e in evidence if e["kind"] == key and e["evidence_status"] == "VERIFIED" and e["evidence_scope"] == "SAMPLE_LEVEL"}
-        if len(values) == 1:
-            sample[key] = values.pop()
-    sample = {k: v for k, v in Candidate(**sample).model_dump().items() if k in sample}
-    proven_behavior = any(e["kind"] == "behavior" and e["evidence_scope"] == "SAMPLE_LEVEL" and e["evidence_status"] == "VERIFIED" for e in evidence)
-    sample_sources = []
-    seen_locations = set()
-    for location in candidate.sample_sources + investigation.sample_sources:
-        item = location.model_dump()
-        key = json.dumps(item, sort_keys=True)
-        if key in seen_locations:
+from research_agent.collection_models import Candidate
+from research_agent.poc_builder import effective_claims
+
+
+def synthesize_static_record(candidate, behavior, investigation, validation, grounded_sources=()):
+    """Level 1: one grounded article must link family, identifier and static findings."""
+    evidence = effective_claims(investigation, validation)
+    identifiers = {"sha256", "sha1", "md5", "package_name"}
+    technical = {"permission", "component", "class", "method", "api", "string", "network", "relationship"}
+    grounded = {s["url"] for s in grounded_sources if s.get("url")}
+    aliases = {s["original_url"]: s["url"] for s in grounded_sources if s.get("original_url")}
+    articles = {}
+    for claim in evidence:
+        excerpt = " ".join((claim.get("excerpt") or "").split())
+        checked_excerpt = " ".join((claim["assessment"].get("source_excerpt") or "").split())
+        if claim["evidence_status"] != "VERIFIED" or not excerpt or not checked_excerpt:
             continue
-        seen_locations.add(key)
-        location_urls = {item[k] for k in ("sample_page_url", "repository_page_url", "download_page_url") if item[k]}
-        matching = [e for e in evidence if e["kind"] == "sample_location" and e["value"] in location_urls and e["evidence_scope"] == "SAMPLE_LEVEL" and e["evidence_status"] == "VERIFIED"]
-        item["evidence_status"] = "VERIFIED" if matching else "UNVERIFIED"
-        item["supports"] = [e["claim_id"] for e in matching]
-        sample_sources.append(item)
-    for item in sample_sources:
-        item["useful_for_manual_acquisition"] = bool(item["useful_for_manual_acquisition"] and item["evidence_status"] == "VERIFIED" and item["evidence_scope"] in {"HASH_LEVEL", "PACKAGE_LEVEL", "SAMPLE_LEVEL"} and item["sample_availability"] in {"AVAILABLE", "REQUIRES_ACCESS", "LOGIN_REQUIRED"})
-    useful = [s for s in sample_sources if s["useful_for_manual_acquisition"]]
-    location_status = "VERIFIED" if useful else ("PARTIAL" if sample_sources else "UNVERIFIED")
-    sample_sources = useful
-    obtainable = bool(useful)
-    accepted = validation.dataset_decision == "ACCEPT" and obtainable and proven_behavior
-    accepted = accepted and (candidate.sha256 is None or sample["sha256"] is None or candidate.sha256 == sample["sha256"])
-    accepted = accepted and not any(e["evidence_status"] == "CONTRADICTED" for e in evidence)
-    identity = candidate.sha256 or json.dumps(candidate.model_dump(), sort_keys=True)
-    record_id = sha256((identity + "\n" + behavior).encode()).hexdigest()[:24]
-    return {
-        "record_id": record_id, "schema_version": "1.0", "behavior": behavior,
-        "sample": sample, "discovered_candidate": candidate.model_dump(),
-        "manifest_evidence": {"permissions": [e for e in evidence if e["kind"] == "permission"], "components": [e for e in evidence if e["kind"] == "component"]},
-        "code_evidence": [e for e in evidence if e["kind"] in {"class", "method", "api", "string"}],
-        "behavior_relationships": [e for e in evidence if e["kind"] == "relationship"],
-        "claims": evidence, "sources": list(sources.values()),
-        "analysis_sources": list(sources.values()), "sample_sources": sample_sources,
-        "validation": {"dataset_decision": "ACCEPT" if accepted else "REJECT", "evidence_strength": "MEDIUM" if accepted else "LOW", "behavior_evidence_strength": "HIGH" if proven_behavior else "LOW", "sample_location_status": location_status, "analyst_verified": False, "assessments": validation.model_dump()["assessments"], "model_decision": validation.dataset_decision},
-    }
+        for source in claim["sources"]:
+            url = aliases.get(source["url"], source["url"])
+            if (url not in grounded or source["url"] not in claim["verified_urls"]
+                    or "grounding-api-redirect" in url
+                    or urlsplit(url).path.lower().endswith((".apk", ".zip"))):
+                continue
+            article = articles.setdefault(url, {"url": url, "title": source["title"] or url,
+                                               "families": set(), "identifiers": {}, "findings": []})
+            kind, value = claim["kind"], claim["value"].strip()
+            if kind == "malware_family":
+                article["families"].add(value)
+            if claim["evidence_scope"] == "FAMILY_LEVEL":
+                continue
+            if kind in identifiers:
+                try:
+                    normalized = getattr(Candidate(**{kind: value}), kind)
+                except ValueError:
+                    continue
+                if kind == "package_name" and not re.fullmatch(r"[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+", value):
+                    continue
+                article["identifiers"].setdefault(kind, set()).add(normalized)
+            # A bare permission name without technical discussion is insufficient.
+            if (kind in technical and source["evidence_category"] == "STATIC_ANALYSIS"
+                    and (kind != "permission" or len(excerpt) > len(value) + 20)):
+                article["findings"].append(value)
+    rows = []
+    for article in articles.values():
+        if (len(article["families"]) != 1 or not article["identifiers"] or not article["findings"]
+                or any(len(values) != 1 for values in article["identifiers"].values())):
+            continue
+        identity = {key: next(iter(values)) for key, values in article["identifiers"].items()}
+        if any(getattr(candidate, key) and getattr(candidate, key).casefold() != value.casefold()
+               for key, value in identity.items()):
+            continue
+        rows.append({"family": next(iter(article["families"])), "url": article["url"],
+                     "title": article["title"], "identifiers": identity,
+                     "findings": list(dict.fromkeys(article["findings"]))})
+    critical = any(c["evidence_status"] == "CONTRADICTED"
+                   and c["kind"] in identifiers | technical | {"malware_family"} for c in evidence)
+    if critical:
+        rows = []
+    reasons = [] if rows else ["No grounded static-analysis article verifies family, a package/hash and code-level findings together."]
+    if not articles:
+        reasons.append("No canonical grounded citation matches the locally validated source excerpts.")
+    elif not rows:
+        if not any(a["families"] for a in articles.values()):
+            reasons.append("Family attribution is not supported by the article evidence.")
+        if not any(a["identifiers"] for a in articles.values()):
+            reasons.append("No article-supported package or valid digest.")
+        if not any(a["findings"] for a in articles.values()):
+            reasons.append("No supported static/code-level findings.")
+    if critical:
+        reasons.append("Critical contradiction in supplied evidence.")
+    return {"sample": {"malware_family": rows[0]["family"] if rows else None},
+            "discovered_candidate": candidate.model_dump(), "claims": evidence,
+            "articles": rows, "grounded_sources": list(grounded_sources),
+            "benchmark_ready": bool(rows), "audit": {},
+            "validation": {"dataset_decision": "ACCEPT" if rows else "REJECT",
+                           "model_decision": validation.dataset_decision,
+                           "analyst_verified": False, "rejection_reasons": reasons}}
